@@ -278,7 +278,6 @@ public class ReportsController extends Controller implements Initializable {
                 reportInformation += "Gestiones Atendidas ";
                 attendeds = managementDtos.stream().filter(isAproved.and(m -> m.getUsrAssignedId().getUsrId().equals(userDto.getUsrId()))).toList();
             }
-            System.out.println("Att " + attendeds.size());
             if (this.chkRequested.isSelected()) {
                 if (this.chkAttended.isSelected()) {
                     reportInformation += "y Solicitadas ";
@@ -288,7 +287,6 @@ public class ReportsController extends Controller implements Initializable {
                 requesteds = managementDtos.stream().filter(m -> m.getUsrRequestingId().getUsrId().equals(userDto.getUsrId())).toList();
             }
             reportInformation += "por el usuario ";
-            System.out.println("Req en sin Tiempo" + requesteds.size());
             if (this.rdbSpecificDate.isSelected()) {
                 reportInformation += "en la fecha";
                 reportInformationDates = this.dprSpecificDate.getValue().toString();
@@ -300,7 +298,6 @@ public class ReportsController extends Controller implements Initializable {
                 reportInformation += "entre las fechas";
                 reportInformationDates = this.dprFromDate.getValue().toString() + " y " + this.dprUntilDate.getValue().toString();
             }
-            System.out.println("Req en tiempo" + requesteds.size());
             managementDtos = managementDtos.stream().filter(isManagementIn(attendeds).or(isManagementIn(requesteds))).toList();
             managementDtos.stream().filter(isManagementIn(requesteds)).forEach(m -> m.setMgtType("Solicitada"));
             managementDtos.stream().filter(isManagementIn(attendeds)).forEach(m -> m.setMgtType("Atendida"));
@@ -463,18 +460,15 @@ public class ReportsController extends Controller implements Initializable {
         }else if (!this.chkAprobationsApproveds.isSelected() && !this.chkAprobationsPendings.isSelected() && !this.chkAprobationsRejecteds.isSelected()) {
             new Message().showModal(Alert.AlertType.ERROR, "Tipo de Aprobaciones", getStage(), "Debe elegir al menos un tipo de aprobaciones");
         }else {
-            System.out.println("Tercer Report");
             generateAndSaveReport3(btnGenerateReport3.getScene().getWindow());
         }
     }
 
     private void generateAndSaveReport3(Window window) {
         List<ManagementaprobationDto> managementaprobationDtos = (List<ManagementaprobationDto>) managementAprobationService.getManagementaprobations().getResult("Managementaprobations");
-        System.out.println("1 "+ managementaprobationDtos.size());
         String aprobationsPerUserDescription = "Aprobaciones ";
         UserDto userDto = this.listViewUserReport3.getSelectionModel().getSelectedItem();
         managementaprobationDtos = managementaprobationDtos.stream().filter(ma->(ma.getUsrToaproveId().getUsrId().equals(userDto.getUsrId()))).toList();
-        System.out.println("2 "+ managementaprobationDtos.size());
         Long approvedAprobations = managementaprobationDtos.stream().filter(ma->(ma.getMgtaState().equals("Approved"))).count();
         Long rejectedAprobations = managementaprobationDtos.stream().filter(ma->(ma.getMgtaState().equals("Approved"))).count();
         Long pendingAprobations = managementaprobationDtos.stream().filter(ma->(ma.getMgtaState().equals("Pending"))).count();
@@ -484,19 +478,16 @@ public class ReportsController extends Controller implements Initializable {
         }else{
             aprobationsPerUserDescription +=" Aprobadas,";
         }
-        System.out.println("3 "+ managementaprobationDtos.size());
         if(!chkAprobationsRejecteds.isSelected()){
             managementaprobationDtos = managementaprobationDtos.stream().filter(ma->(!ma.getMgtaState().equals("Rejected"))).toList();
         }else{
             aprobationsPerUserDescription +=" Rechazadas,";
         }
-        System.out.println("4 "+ managementaprobationDtos.size());
         if(!chkAprobationsPendings.isSelected()){
             managementaprobationDtos = managementaprobationDtos.stream().filter(ma->(!ma.getMgtaState().equals("Pending"))).toList();
         }else{
             aprobationsPerUserDescription +=" Pendientes.";
         }
-        System.out.println("5 "+ managementaprobationDtos.size());
         int index = aprobationsPerUserDescription.lastIndexOf(",");
         if(index == aprobationsPerUserDescription.length()-1 && index != -1){
             aprobationsPerUserDescription = aprobationsPerUserDescription.subSequence(0, index)+".";

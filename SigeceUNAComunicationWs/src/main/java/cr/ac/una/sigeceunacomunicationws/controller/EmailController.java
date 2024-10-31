@@ -215,7 +215,6 @@ public class EmailController {
             message.setContent(body, "text/html; charset=utf-8");
 
             Transport.send(message);
-            System.out.println("Correo enviado exitosamente");
 
         } catch (MessagingException e) {
             throw new RuntimeException(e);

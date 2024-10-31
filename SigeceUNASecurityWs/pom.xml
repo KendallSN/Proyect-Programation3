@@ -5,7 +5,7 @@
     <artifactId>SigeceUNASecurityWs</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
-    <name>SigeceUNASecurityWs-1.0</name>
+    <name>SigeceUNASecurityWs</name>
     
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -242,9 +242,6 @@ public class MailController extends Controller implements Initializable {
             observableListEmails.clear();
             Long notificationProcessID = listViewNotificationProcess.getSelectionModel().getSelectedItem().getNtpId();
             List<VariableDto> variables = (List<VariableDto>) variableService.getVariablesByNTP(notificationProcessID).getResult("Variables");
-            for(VariableDto var:variables){
-                System.out.println("Var:"+var.getVarVariable()+" Default:"+var.getVarDefault());
-            }
             // Load excel window config
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("Open Excel File");
@@ -313,12 +310,9 @@ public class MailController extends Controller implements Initializable {
     }
     private boolean isValueToContrainWithValue(List<VariableDto> variables, String variable, String stringCellValue){
         for(VariableDto var : variables){
-            System.out.println(var.getVarVariable()+ variable + "    a");
             if(var.getVarVariable().equals(variable)){
-                System.out.println("b");
                 List<ConstrainDto> constrains = (List<ConstrainDto>) this.constrainService.getConstrainsByVariable(var.getVarId()).getResult("Constrains");
                 for(ConstrainDto constrain : constrains){
-                    System.out.println("cons "+ constrain.getCnstResult());
                     if(constrain.getCnstSymbol().equals(stringCellValue)){
                         return true;
                     }
@@ -332,7 +326,6 @@ public class MailController extends Controller implements Initializable {
                 List<ConstrainDto> constrains = (List<ConstrainDto>) this.constrainService.getConstrainsByVariable(var.getVarId()).getResult("Constrains");
                 for(ConstrainDto constrain : constrains){
                     if(constrain.getCnstSymbol().equals(stringCellValue)){
-                        System.out.println("Resultado"+constrain.getCnstResult());
                         return constrain.getCnstResult();
                     }
                 }
@@ -429,7 +422,6 @@ public class MailController extends Controller implements Initializable {
                 fileFormat = getFileExtension(selectedFile);
                 observableListFiles.add(new FileDto(null,fileFormat,fileName,binaryData));
                 
-                System.out.println("Formato del archivo: " + fileFormat);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -459,8 +451,6 @@ public class MailController extends Controller implements Initializable {
             try {
                 // Convertir el array de chars binario a bytes y escribir en el archivo
                 writeBinaryDataToFile(fileToSave, fileDto.getFleContent());
-
-                System.out.println("Archivo guardado exitosamente en: " + fileToSave.getAbsolutePath());
             } catch (IOException e) {
                 e.printStackTrace();
             }
