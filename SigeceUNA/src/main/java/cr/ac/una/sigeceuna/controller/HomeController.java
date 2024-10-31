@@ -6,6 +6,7 @@ import cr.ac.una.sigeceuna.model.UserDto;
 import cr.ac.una.sigeceuna.service.AreaService;
 import cr.ac.una.sigeceuna.service.ManagementService;
 import cr.ac.una.sigeceuna.util.AppContext;
+import cr.ac.una.sigeceuna.util.Response;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,7 +33,7 @@ public class HomeController extends Controller implements Initializable {
     @FXML
     private Label txtManagementToAttend;
     @FXML
-    private ChoiceBox<AreaDto> choiseBoxAreas;
+    private ChoiceBox<String> choiceBoxAreas;
     @FXML
     private TableView<ManagementDto> tblRequestedProcedures;
     @FXML
@@ -69,6 +70,7 @@ public class HomeController extends Controller implements Initializable {
 
     //Lists to take information from the database
     List<ManagementDto> allManagements;
+    List<AreaDto> areas;
 
     //Services
     private ManagementService managementService = new ManagementService();
@@ -79,6 +81,7 @@ public class HomeController extends Controller implements Initializable {
     private ObservableList<ManagementDto> observablePendingAttentionProcedures = FXCollections.observableArrayList();
     private ObservableList<ManagementDto> observableCompletedProcedures = FXCollections.observableArrayList();
     private ObservableList<ManagementDto> observableManagements = FXCollections.observableArrayList();
+    private ObservableList<String> observableAreas = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -89,10 +92,10 @@ public class HomeController extends Controller implements Initializable {
     public void initialize() {
 
         cleanObservableList();
-        loadTables();
         filterManagementsRequested();
         filterManagementsProceduresToaprove();
         filterManagementsAttend();
+        loadAreasChoiceBox();
     }
 
     private void cleanObservableList() {
@@ -109,8 +112,17 @@ public class HomeController extends Controller implements Initializable {
         loadCompletedProcedures();
     }
 
-    private void loadAreasChoiseBox() {  
-        choiseBoxAreas.setItems((ObservableList<AreaDto>) areService.getAreas());
+    private void loadAreasChoiceBox() {
+        Response response = areService.getAreas();
+        
+        areas = (List<AreaDto>) response.getResult("Areas");
+        
+        List<String> areaNames = areas.stream()
+                .map(AreaDto::getAreName) 
+                .collect(Collectors.toList());
+
+        observableAreas = FXCollections.observableArrayList(areaNames);
+        choiceBoxAreas.setItems(observableAreas);
     }
 
     //Tables
@@ -129,7 +141,6 @@ public class HomeController extends Controller implements Initializable {
         tblRequestedProcedures.setItems(observableRequestedProcedures);
     }
 
-    //5
     private void loadPendingAttentionProcedures() {
         allManagements = (List<ManagementDto>) managementService.getManagements().getResult("Managements");
 
@@ -146,7 +157,6 @@ public class HomeController extends Controller implements Initializable {
         tblPendingProcedures.setItems(observablePendingAttentionProcedures);
     }
 
-    //6 Falta
     private void loadProceduresToApprove() {
         allManagements = (List<ManagementDto>) managementService.getManagementsToAprovedBy(userDto.getUsrId()).getResult("Managements");
 
@@ -158,7 +168,6 @@ public class HomeController extends Controller implements Initializable {
         tblProceduresToApprove.setItems(observableManagements);
     }
 
-    //7
     private void loadCompletedProcedures() {
         allManagements = (List<ManagementDto>) managementService.getManagements().getResult("Managements");
 
