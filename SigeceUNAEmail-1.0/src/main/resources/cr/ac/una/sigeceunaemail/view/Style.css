@@ -1,0 +1,140 @@
+*{
+    -fx-base-color-first: #d14334;
+    -fx-base-color-second: #B6C8CF;
+    -fx-base-color-third: #178FCC;
+    -fx-base-color-fourth:#24599c;
+    -fx-base-color-fifth:#1c2130;
+    -fx-color-background: #ec9999;
+    -fx-base-color-green:#8be8a4;
+    -fx-base-color-darkGreen:#0a6623;
+}
+
+/*Images*/
+#imgLogo{-fx-image: url("../resources/logo.png");}
+#imgUser{-fx-image: url("../resources/iconLogin.png");}
+#imgPassword{-fx-image: url("../resources/iconPassword.png");}
+#imgUserPhoto{-fx-image: url("../resources/photo.png");}
+
+/*Label*/
+.label {
+    -fx-font-size: 40px;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 5, 0, 1, 1);
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+}
+.label-small{
+    -fx-font-size: 20px;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 5, 0, 1, 1);
+    -fx-border-width: 1px;
+    -fx-padding: 5px;
+    -fx-alignment: center;
+}
+#labelEnterEmail{
+    -fx-font-size: 20px;
+}
+#lblEmail,#lblPassword,#lblLimitPerHour,#lblTime,#lblPort{
+        -fx-font-size: 20px;
+}
+/*background*/
+.smoothbackground{
+    -fx-background-color:-fx-base-color-second;
+}
+.smoothbackground2{
+    -fx-background-color:#e1e7e8;  
+}
+.rootbackground{
+   -fx-background-color:-fx-base-color-fourth;   
+}
+.shadoweffect{
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 20, 0, 0, 0);
+}
+
+/*Buttons*/
+.button {
+ -fx-pref-width: 200px;
+  -fx-pref-height: 40px;
+  -fx-alignment: center;
+  -fx-font-size: 16px;
+  -fx-cursor: hand;
+  -fx-border-color: -fx-base-color-fourth;
+  -fx-background-color: -fx-base-color-second;
+  -fx-text-fill: -fx-base-color-fifth;
+  -fx-font-weight: bold;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
+}
+.button-manegement{
+  -fx-pref-width: 200px;
+  -fx-pref-height: 40px;
+  -fx-alignment: center;
+  -fx-font-size: 16px;
+  -fx-cursor: hand;
+  -fx-border-color:-fx-base-color-darkGreen;
+  -fx-background-color:-fx-base-color-green;
+  -fx-text-fill: -fx-base-color-fifth;
+  -fx-font-weight: bold;
+  -fx-background-radius: 20px;
+  -fx-border-radius: 20px;
+}
+.choiceBox{
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-max-width: 40px;
+    -fx-max-height: 40px;
+    -fx-min-width: 40px;   
+    -fx-min-height: 40px;
+}
+.choice-box .label{
+    -fx-font-size: 14px;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 16px;  /* Tamaño del texto para el encabezado */
+    -fx-font-weight: bold; /* Negrita para el encabezado */
+}
+
+#btnCancel{
+    -fx-background-color:#b72c2c;
+}
+.button-Delete{
+    -fx-background-color:#b72c2c;
+}
+#btnLogIn{
+    -fx-background-color:#6c9669;
+}
+#btnConfirm{-fx-background-color:#6c9669;}
+#btnForgotPassword {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: blue;
+    -fx-font-size: 14px;
+    -fx-padding: 0;
+     -fx-underline: true;
+    -fx-underline-color: blue;
+    -fx-font-weight: normal;
+}
+
+#btnAskTemporaryPassword{
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-text-fill: blue;
+    -fx-font-size: 14px;
+    -fx-padding: 0;
+     -fx-underline: true;
+    -fx-underline-color: blue;
+    -fx-font-weight: normal;
+}
+ #btnSignInUser{-fx-background-color:#6c9669;}
+ #btnTakePhoto{
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-background-radius: 0px;
+    -fx-border-radius: 0px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-image: url("../resources/iconCamara.png");
+    -fx-background-size: 40px 40px;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;}

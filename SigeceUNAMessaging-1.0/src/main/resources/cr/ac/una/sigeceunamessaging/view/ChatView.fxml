@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="541.0" prefWidth="815.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceunamessaging.controller.ChatController">
+   <children>
+      <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <HBox alignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox prefHeight="532.0" prefWidth="376.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label prefHeight="68.0" prefWidth="240.0" text="Chats" />
+                              <Button fx:id="btn_deleteChat" alignment="CENTER_RIGHT" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnDeleteChat" prefHeight="45.0" prefWidth="99.0" text="Eliminar" />
+                           </children>
+                        </HBox>
+                        <TextArea fx:id="txtArea_Search" prefHeight="24.0" prefWidth="214.0" promptText="Search" />
+                        <Separator prefWidth="200.0" />
+                      <AnchorPane prefHeight="427.0" prefWidth="215.0">
+                           <children>
+                              <ListView fx:id="listViewChats" onMouseClicked="#handleUserClick" prefHeight="410.0" prefWidth="214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </VBox>
+                  <Separator orientation="VERTICAL" prefHeight="532.0" prefWidth="0.0" />
+                  <VBox alignment="CENTER" prefHeight="532.0" prefWidth="745.0" styleClass="shadoweffect">
+                     <children>
+                        <AnchorPane prefHeight="68.0" prefWidth="584.0" styleClass="smoothbackground2">
+                           <children>
+                              <Label fx:id="label_Addressee" alignment="CENTER" contentDisplay="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+                              <ImageView fx:id="ImgView_PhotoChat" fitHeight="63.0" fitWidth="69.0" layoutX="34.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true" />
+                           </children>
+                        </AnchorPane>
+                        <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" styleClass="rootbackground" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                           <content>
+                              <VBox fx:id="VBox_ChatMessages" styleClass="smoothbackground" />
+                           </content>
+                        </ScrollPane>
+                        <HBox alignment="CENTER" prefHeight="61.0" prefWidth="584.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <TextArea fx:id="txtField_Message" focusTraversable="false" prefHeight="63.0" prefWidth="533.0" promptText="Mensaje" HBox.hgrow="ALWAYS">
+                                       <font>
+                                          <Font size="21.0" />
+                                       </font>
+                                    </TextArea>
+                                    <Button fx:id="btn_Send" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnSend" prefHeight="87.0" prefWidth="89.0" text="Enviar" />
+                                 </children>
+                              </HBox>
+                              <Button fx:id="btnFile" mnemonicParsing="false" onAction="#onActionBtnLoadFile">
+                                 <graphic>
+                                    <ImageView fitHeight="27.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets left="5.0" right="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+         <styleClass>
+            <String fx:value="smoothbackground2" />
+            <String fx:value="shadoweffect" />
+         </styleClass>
+      </AnchorPane>
+   </children>
+   <styleClass>
+      <String fx:value="rootbackground" />
+      <String fx:value="shadoweffect" />
+   </styleClass>
+</AnchorPane>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1050.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceunaemail.controller.MailController">
+   <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="706.0" prefWidth="260.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label text="Notification processes" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </Label>
+                        <TextField fx:id="txtNPname_Search" prefHeight="50.0" prefWidth="317.0" promptText="Search by Description">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </TextField>
+                        <ListView fx:id="listViewNotificationProcess" prefHeight="588.0" prefWidth="316.0" VBox.vgrow="ALWAYS" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="706.0" prefWidth="200.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="578.0" prefWidth="200.0" spacing="40.0">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#generateExcel" text="Generate excel" />
+                              <Button mnemonicParsing="false" onAction="#loadExcel" text="Load excel" />
+                           </children>
+                           <padding>
+                              <Insets left="20.0" right="20.0" top="40.0" />
+                           </padding>
+                        </VBox>
+                        <VBox prefHeight="728.0" prefWidth="140.0">
+                           <children>
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="219.0" text="Files" VBox.vgrow="ALWAYS" />
+                              <ListView fx:id="listViewFiles" onMouseClicked="#handleFileClicked" prefHeight="541.0" prefWidth="140.0" />
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button mnemonicParsing="false" onAction="#onActionAddFile" prefHeight="37.0" prefWidth="248.0" text="Add file" />
+                                    <Button mnemonicParsing="false" onAction="#onActionClearFiles" prefHeight="37.0" prefWidth="121.0" text="Clear">
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin>
+                                 <padding>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="706.0" prefWidth="438.0">
+                     <children>
+                        <Label text="Emails" />
+                        <TextField fx:id="txtEmail_Search" prefHeight="50.0" prefWidth="317.0" promptText="Search by Email">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </TextField>
+                        <ListView fx:id="listViewEmails" focusTraversable="false" onMouseClicked="#handleNotificationProcessClick" prefHeight="655.0" prefWidth="312.0" VBox.vgrow="ALWAYS" />
+                        <Button mnemonicParsing="false" onAction="#onActionAproveToSend" text="Approve to send">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </VBox.margin></Button>
+                     </children>
+                  </VBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

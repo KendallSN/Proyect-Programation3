@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1000.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.CalendarController">
+   <children>
+      <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <children>
+            <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+                     <children>
+                        <VBox alignment="TOP_CENTER" prefHeight="610.0" prefWidth="314.0">
+                           <children>
+                              <Label alignment="CENTER" prefHeight="68.0" prefWidth="240.0" text="%label.calendar" textAlignment="CENTER" />
+                              <DatePicker fx:id="datePicker_ManagementCalendar" centerShape="false" focusTraversable="false" prefHeight="54.0" prefWidth="299.0" promptText="%prompt.managementsCalendar">
+                                 <styleClass>
+                                    <String fx:value="label-small" />
+                                    <String fx:value="custom-date-picker" />
+                                 </styleClass></DatePicker>
+                           </children>
+                        </VBox>
+                        <Separator orientation="VERTICAL" prefHeight="200.0" />
+                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="SOMETIMES">
+                           <children>
+                              <TitledPane fx:id="titledPane_Information" expanded="false" focusTraversable="false" prefHeight="142.0" prefWidth="670.0" text="%tittledPane.howManagementsCalendarWorks">
+                                <content>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                       <children>
+                                          <TextArea fx:id="txtArea_Information" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                       </children>
+                                    </AnchorPane>
+                                </content>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </TitledPane>
+                              <Label styleClass="label-small" text="%label.dailyManagements" />
+                              <TableView fx:id="tblV_Managements" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+                                <columns>
+                                  <TableColumn fx:id="tblC_ID" prefWidth="75.0" text="%tblC.id" />
+                                  <TableColumn fx:id="tblC_Subject" prefWidth="75.0" text="%tblC.subject" />
+                                    <TableColumn fx:id="tblC_MaxDateToSolve" prefWidth="75.0" text="%tblC.resolve" />
+                                </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <styleClass>
+            <String fx:value="smoothbackground2" />
+            <String fx:value="shadoweffect" />
+         </styleClass>
+      </AnchorPane>
+   </children>
+   <styleClass>
+      <String fx:value="rootbackground" />
+      <String fx:value="shadoweffect" />
+   </styleClass>
+</AnchorPane>

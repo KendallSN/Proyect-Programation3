@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="706.0" prefWidth="1050.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.ReportsController">
+   <styleClass>
+      <String fx:value="rootbackground" />
+      <String fx:value="shadoweffect" />
+   </styleClass>
+   <children>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+         <styleClass>
+            <String fx:value="smoothbackground2" />
+            <String fx:value="shadoweffect" />
+         </styleClass>
+      </AnchorPane>
+      <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Reportes">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <TabPane prefHeight="547.0" prefWidth="1050.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+              <tabs>
+                <Tab text="Gestiones por usuario">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1050.0">
+                           <children>
+                              <HBox prefHeight="291.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox prefHeight="218.0" prefWidth="352.0">
+                                       <children>
+                                          <TextField fx:id="txtFilterUser" focusTraversable="false" prefHeight="59.0" prefWidth="352.0" promptText="Nombre Completo" />
+                                          <ListView fx:id="listViewUserReport1" focusTraversable="false" prefHeight="201.0" prefWidth="277.0" VBox.vgrow="ALWAYS">
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </ListView>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="218.0" prefWidth="158.0" spacing="40.0">
+                                       <children>
+                                          <Label text="Incluir Gestiones" />
+                                          <CheckBox fx:id="chkAttended" focusTraversable="false" mnemonicParsing="false" text="Atendidas" />
+                                          <CheckBox fx:id="chkRequested" focusTraversable="false" mnemonicParsing="false" text="Solicitadas" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="218.0" prefWidth="154.0" spacing="40.0">
+                                       <children>
+                                          <Label text="Tipo de plazo" />
+                                          <RadioButton fx:id="rdbSpecificDate" focusTraversable="false" mnemonicParsing="false" onAction="#specificDateSelected" selected="true" text="Fecha especifica" />
+                                          <RadioButton fx:id="rdbRangeDates" focusTraversable="false" mnemonicParsing="false" onAction="#rangeDateSelected" text="Rango de fechas" />
+                                       </children>
+                                    </VBox>
+                                    <AnchorPane prefHeight="572.0" prefWidth="182.0">
+                                       <children>
+                                          <VBox fx:id="vBoxSpecificDate" alignment="CENTER" prefHeight="218.0" prefWidth="184.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Label text="Fecha" />
+                                                <VBox alignment="CENTER" prefHeight="0.0" prefWidth="166.0">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="11.0" prefWidth="166.0">
+                                                   <children>
+                                                      <DatePicker fx:id="dprSpecificDate" editable="false" focusTraversable="false" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                          <VBox fx:id="vBoxRangeDates" alignment="CENTER" prefHeight="218.0" prefWidth="329.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <Label text="Rango de fechas" />
+                                                <VBox alignment="CENTER" prefHeight="0.0" prefWidth="166.0">
+                                                   <children>
+                                                      <Label text="Desde" />
+                                                      <DatePicker fx:id="dprFromDate" />
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="11.0" prefWidth="166.0">
+                                                   <children>
+                                                      <Label text="Hasta" />
+                                                      <DatePicker fx:id="dprUntilDate" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <VBox alignment="CENTER" prefHeight="218.0" prefWidth="153.0">
+                                       <children>
+                                          <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionGenerateReport1" prefHeight="25.0" prefWidth="167.0" text="Generar Reporte" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab text="Rendimiento de gestiones">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="572.0" prefWidth="483.0">
+                                       <children>
+                                          <Label text="Gestiones a incluir" />
+                                          <HBox prefHeight="162.0" prefWidth="200.0">
+                                             <children>
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <RadioButton fx:id="rdbAllManagements" mnemonicParsing="false" onAction="#onActionrdbAllManagements" selected="true" text="Todas las Gestiones" />
+                                                   </children>
+                                                </VBox>
+                                                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                                   <children>
+                                                      <RadioButton fx:id="rdbManagementsPerArea" mnemonicParsing="false" onAction="#onActionrdbManagementsPerArea" text="Gestiones por Area" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <VBox fx:id="vBoxAreas" prefHeight="510.0" prefWidth="483.0">
+                                             <children>
+                                                <TextField fx:id="txtFilterAreas" prefHeight="39.0" prefWidth="483.0" promptText="Nombre de Area">
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
+                                                </TextField>
+                                                <ListView fx:id="listViewAreas" prefHeight="214.0" prefWidth="483.0" VBox.vgrow="ALWAYS" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Button fx:id="btnGenerateReport2" mnemonicParsing="false" onAction="#onActionGenerateReport2" text="Generar reporte" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </padding>
+                              </HBox>
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab text="Aprobaciones por usuario">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox prefHeight="100.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <VBox alignment="CENTER" prefHeight="532.0" prefWidth="489.0">
+                                       <children>
+                                          <Label text="Usuarios" />
+                                          <TextField fx:id="txtFilterUser2" prefHeight="45.0" prefWidth="328.0" promptText="Nombre Completo" />
+                                          <ListView fx:id="listViewUserReport3" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="532.0" prefWidth="298.0" spacing="40.0">
+                                       <children>
+                                          <VBox alignment="CENTER" prefHeight="73.0" prefWidth="298.0">
+                                             <children>
+                                                <Label text="Incluir Aprobaciones" />
+                                             </children>
+                                          </VBox>
+                                          <CheckBox fx:id="chkAprobationsApproveds" mnemonicParsing="false" text="Aprobadas" />
+                                          <CheckBox fx:id="chkAprobationsRejecteds" mnemonicParsing="false" text="Rechazadas" />
+                                          <CheckBox fx:id="chkAprobationsPendings" mnemonicParsing="false" text="Pendiente" />
+                                       </children>
+                                    </VBox>
+                                    <VBox alignment="CENTER" prefHeight="532.0" prefWidth="258.0">
+                                       <children>
+                                          <Button fx:id="btnGenerateReport3" mnemonicParsing="false" onAction="#onActionGenerateReport3" text="Generar Reporte" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </padding></AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" />
+               </VBox.margin>
+            </TabPane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
