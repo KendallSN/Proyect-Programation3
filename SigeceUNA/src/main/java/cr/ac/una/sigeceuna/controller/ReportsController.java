@@ -9,6 +9,7 @@ import cr.ac.una.sigeceuna.service.ManagementAprobationService;
 import cr.ac.una.sigeceuna.service.ManagementService;
 import cr.ac.una.sigeceuna.service.UserService;
 import cr.ac.una.sigeceuna.util.AppContext;
+import cr.ac.una.sigeceuna.util.FlowController;
 import cr.ac.una.sigeceuna.util.Message;
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -126,9 +127,11 @@ public class ReportsController extends Controller implements Initializable {
     @FXML
     private Button btnGenerateReport3;
     private ManagementAprobationService managementAprobationService = new ManagementAprobationService();
+    private ResourceBundle bundle;
     //End Third Report vars
     @Override
     public void initialize() {
+        this.bundle=FlowController.getIdioma();
         //Reset selections
         this.changeManagementsReportPerformance(true);
         this.changeTypeOfTime(true);
@@ -252,15 +255,15 @@ public class ReportsController extends Controller implements Initializable {
     @FXML
     void onActionGenerateReport1(ActionEvent event) {
         if (!this.chkAttended.isSelected() && !this.chkRequested.isSelected()) {
-            new Message().showModal(Alert.AlertType.ERROR, "Incluir Gestiones", getStage(), "Debe incluir algun tipo de gestión");
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("includeManagements"), getStage(), bundle.getString("includeATypeOfManagement"));
         } else if (rdbSpecificDate.isSelected() && dprSpecificDate.getValue() == null) {
-            new Message().showModal(Alert.AlertType.ERROR, "Fecha", getStage(), "Debe elegir una fecha");
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("date"), getStage(), bundle.getString("selectADate"));
         } else if (rdbRangeDates.isSelected() && (dprFromDate.getValue() == null || dprUntilDate.getValue() == null)) {
-            new Message().showModal(Alert.AlertType.ERROR, "Fechas", getStage(), "Debe elegir dos fechas");
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("dates"), getStage(), bundle.getString("selectDates"));
         } else if (rdbRangeDates.isSelected() && (dprFromDate.getValue().isAfter(dprUntilDate.getValue()) || dprFromDate.getValue().isEqual(dprUntilDate.getValue()))) {
-            new Message().showModal(Alert.AlertType.ERROR, "Fechas", getStage(), "Asegurese que la fecha Desde sea antes de la Hasta");
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("dates"), getStage(), bundle.getString("checkDates"));
         } else if (listViewUserReport1.getSelectionModel().isEmpty()) {
-            new Message().showModal(Alert.AlertType.ERROR, "Usuario", getStage(), "Debe elegir un usuario");
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("user"), getStage(), bundle.getString("selectAnUser"));
         } else {
             generateAndSaveReport1(this.listViewUserReport1.getScene().getWindow());
         }
@@ -323,8 +326,8 @@ public class ReportsController extends Controller implements Initializable {
 
                 // Desplegar ventana para elegir ubicación de guardado usando FileChooser
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Guardar reporte");
-                fileChooser.setInitialFileName("ReporteDe" + ".pdf");
+                fileChooser.setTitle(bundle.getString("saveReport"));
+                fileChooser.setInitialFileName(bundle.getString("reportOf") + " " + ".pdf");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf"));
                 File fileToSave = fileChooser.showSaveDialog(window);
 
@@ -336,13 +339,13 @@ public class ReportsController extends Controller implements Initializable {
                     try (FileOutputStream outputStream = new FileOutputStream(fileToSave)) {
                         JasperExportManager.exportReportToPdfStream(jp, outputStream);
                     }
-                    new Message().showModal(Alert.AlertType.CONFIRMATION, "Reporte Guardado", getStage(), "El reporte se guardo con exito");
+                    new Message().showModal(Alert.AlertType.CONFIRMATION, bundle.getString("reportSaved"), getStage(), bundle.getString("reportSavedSuccess"));
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "No se pudo generar el reporte. Archivos no encontrados.");
+                JOptionPane.showMessageDialog(null, bundle.getString("filesNotFound"));
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ocurrió un error al generar el reporte: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, bundle.getString("saveErrorReport") + " " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -369,7 +372,7 @@ public class ReportsController extends Controller implements Initializable {
     @FXML
     void onActionGenerateReport2(ActionEvent event) {
         if (rdbManagementsPerArea.isSelected() && listViewAreas.getSelectionModel().isEmpty()) {
-            new Message().showModal(Alert.AlertType.ERROR, "Area", getStage(), "Debe elegir un area");
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("area"), getStage(), bundle.getString("selectAnArea"));
         } else {
             generateAndSaveReport2(btnGenerateReport2.getScene().getWindow());
         }
@@ -428,8 +431,8 @@ public class ReportsController extends Controller implements Initializable {
 
                 // Desplegar ventana para elegir ubicación de guardado usando FileChooser
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Guardar reporte");
-                fileChooser.setInitialFileName("ReporteDeRendimiento" + ".pdf");
+                fileChooser.setTitle(bundle.getString("saveReport"));
+                fileChooser.setInitialFileName(bundle.getString("performanceReport") + ".pdf");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf"));
                 File fileToSave = fileChooser.showSaveDialog(window);
 
@@ -441,13 +444,13 @@ public class ReportsController extends Controller implements Initializable {
                     try (FileOutputStream outputStream = new FileOutputStream(fileToSave)) {
                         JasperExportManager.exportReportToPdfStream(jp, outputStream);
                     }
-                    new Message().showModal(Alert.AlertType.CONFIRMATION, "Reporte Guardado", getStage(), "El reporte se guardo con exito");
+                    new Message().showModal(Alert.AlertType.CONFIRMATION, bundle.getString("reportSaved"), getStage(), bundle.getString("reportSavedSuccess"));
                 }
             } else {
-                new Message().showModal(Alert.AlertType.ERROR, "Generar Reporte", getStage(), "No se pudo generar el reporte. Archivos no encontrados.");
+                new Message().showModal(Alert.AlertType.ERROR, bundle.getString("generateReport"), getStage(), bundle.getString("filesNotFound"));
             }
         } catch (Exception e) {
-            new Message().showModal(Alert.AlertType.ERROR, "Generar Reporte", getStage(), "Ocurrió un error al generar el reporte: " + e.getMessage());
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("generateReport"), getStage(), bundle.getString("saveErrorReport") + " " + e.getMessage());
             e.printStackTrace();
         }
     }
@@ -456,9 +459,9 @@ public class ReportsController extends Controller implements Initializable {
     @FXML
     void onActionGenerateReport3(ActionEvent event) {
         if(this.listViewUserReport3.getSelectionModel().getSelectedItem()==null){
-            new Message().showModal(Alert.AlertType.ERROR, "Usuario", getStage(), "Debe elegir un Usuario para generar el report");
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("user"), getStage(), bundle.getString("selectAnUser"));
         }else if (!this.chkAprobationsApproveds.isSelected() && !this.chkAprobationsPendings.isSelected() && !this.chkAprobationsRejecteds.isSelected()) {
-            new Message().showModal(Alert.AlertType.ERROR, "Tipo de Aprobaciones", getStage(), "Debe elegir al menos un tipo de aprobaciones");
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("aprobationsType"), getStage(), bundle.getString("atLeastOneAprobation"));
         }else {
             generateAndSaveReport3(btnGenerateReport3.getScene().getWindow());
         }
@@ -522,8 +525,8 @@ public class ReportsController extends Controller implements Initializable {
 
                 // Desplegar ventana para elegir ubicación de guardado usando FileChooser
                 FileChooser fileChooser = new FileChooser();
-                fileChooser.setTitle("Guardar reporte");
-                fileChooser.setInitialFileName("AprobacionesDe" +userDto.getUsrName()+ ".pdf");
+                fileChooser.setTitle(bundle.getString("saveReport"));
+                fileChooser.setInitialFileName(bundle.getString("aprobationsOf") +userDto.getUsrName()+ ".pdf");
                 fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf"));
                 File fileToSave = fileChooser.showSaveDialog(window);
 
@@ -535,13 +538,13 @@ public class ReportsController extends Controller implements Initializable {
                     try (FileOutputStream outputStream = new FileOutputStream(fileToSave)) {
                         JasperExportManager.exportReportToPdfStream(jp, outputStream);
                     }
-                    new Message().showModal(Alert.AlertType.INFORMATION, "Reporte Guardado", getStage(), "El reporte se guardo con exito");
+                    new Message().showModal(Alert.AlertType.INFORMATION, bundle.getString("reportSaved"), getStage(), bundle.getString("reportSavedSuccess"));
                 }
             } else {
-                new Message().showModal(Alert.AlertType.ERROR, "Generar Reporte", getStage(), "No se pudo generar el reporte. Archivos no encontrados.");
+                new Message().showModal(Alert.AlertType.ERROR, bundle.getString("generateReport"), getStage(), bundle.getString("filesNotFound"));
             }
         } catch (Exception e) {
-            new Message().showModal(Alert.AlertType.ERROR, "Generar Reporte", getStage(), "Ocurrió un error al generar el reporte: " + e.getMessage());
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("generateReport"), getStage(), bundle.getString("saveErrorReport") + " " + e.getMessage());
             e.printStackTrace();
         }
     }

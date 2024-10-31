@@ -32,7 +32,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Reportes">
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="%label.reports">
                      <font>
                         <Font size="9.0" />
                      </font>
@@ -41,7 +41,7 @@
             </HBox>
             <TabPane prefHeight="547.0" prefWidth="1050.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
               <tabs>
-                <Tab text="Gestiones por usuario">
+                <Tab text="%label.managementsByUser">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="1050.0">
                            <children>
@@ -49,7 +49,10 @@
                                  <children>
                                     <VBox prefHeight="218.0" prefWidth="352.0">
                                        <children>
-                                          <TextField fx:id="txtFilterUser" focusTraversable="false" prefHeight="59.0" prefWidth="352.0" promptText="Nombre Completo" />
+                                          <TextField fx:id="txtFilterUser" focusTraversable="false" prefHeight="59.0" prefWidth="352.0" promptText="%prompt.completeName">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font></TextField>
                                           <ListView fx:id="listViewUserReport1" focusTraversable="false" prefHeight="201.0" prefWidth="277.0" VBox.vgrow="ALWAYS">
                                              <VBox.margin>
                                                 <Insets />
@@ -59,23 +62,23 @@
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="218.0" prefWidth="158.0" spacing="40.0">
                                        <children>
-                                          <Label text="Incluir Gestiones" />
-                                          <CheckBox fx:id="chkAttended" focusTraversable="false" mnemonicParsing="false" text="Atendidas" />
-                                          <CheckBox fx:id="chkRequested" focusTraversable="false" mnemonicParsing="false" text="Solicitadas" />
+                                          <Label text="%label.includeManagements" />
+                                          <CheckBox fx:id="chkAttended" focusTraversable="false" mnemonicParsing="false" text="%chk.attended" />
+                                          <CheckBox fx:id="chkRequested" focusTraversable="false" mnemonicParsing="false" text="%chk.requested" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="218.0" prefWidth="154.0" spacing="40.0">
                                        <children>
-                                          <Label text="Tipo de plazo" />
-                                          <RadioButton fx:id="rdbSpecificDate" focusTraversable="false" mnemonicParsing="false" onAction="#specificDateSelected" selected="true" text="Fecha especifica" />
-                                          <RadioButton fx:id="rdbRangeDates" focusTraversable="false" mnemonicParsing="false" onAction="#rangeDateSelected" text="Rango de fechas" />
+                                          <Label text="%label.termType" />
+                                          <RadioButton fx:id="rdbSpecificDate" focusTraversable="false" mnemonicParsing="false" onAction="#specificDateSelected" selected="true" text="%rBtn.specificDate" />
+                                          <RadioButton fx:id="rdbRangeDates" focusTraversable="false" mnemonicParsing="false" onAction="#rangeDateSelected" text="%rBtn.dateRange" />
                                        </children>
                                     </VBox>
                                     <AnchorPane prefHeight="572.0" prefWidth="182.0">
                                        <children>
                                           <VBox fx:id="vBoxSpecificDate" alignment="CENTER" prefHeight="218.0" prefWidth="184.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label text="Fecha" />
+                                                <Label text="%date" />
                                                 <VBox alignment="CENTER" prefHeight="0.0" prefWidth="166.0">
                                                    <VBox.margin>
                                                       <Insets />
@@ -90,10 +93,10 @@
                                           </VBox>
                                           <VBox fx:id="vBoxRangeDates" alignment="CENTER" prefHeight="218.0" prefWidth="329.0" spacing="10.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label text="Rango de fechas" />
+                                                <Label text="%label.dateRange" />
                                                 <VBox alignment="CENTER" prefHeight="0.0" prefWidth="166.0">
                                                    <children>
-                                                      <Label text="Desde" />
+                                                      <Label text="%label.from" />
                                                       <DatePicker fx:id="dprFromDate" />
                                                    </children>
                                                    <VBox.margin>
@@ -102,7 +105,7 @@
                                                 </VBox>
                                                 <VBox alignment="CENTER" prefHeight="11.0" prefWidth="166.0">
                                                    <children>
-                                                      <Label text="Hasta" />
+                                                      <Label text="%label.to" />
                                                       <DatePicker fx:id="dprUntilDate" />
                                                    </children>
                                                 </VBox>
@@ -112,7 +115,7 @@
                                     </AnchorPane>
                                     <VBox alignment="CENTER" prefHeight="218.0" prefWidth="153.0">
                                        <children>
-                                          <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionGenerateReport1" prefHeight="25.0" prefWidth="167.0" text="Generar Reporte" />
+                                          <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionGenerateReport1" prefHeight="25.0" prefWidth="167.0" text="%button.generateReport" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -124,7 +127,7 @@
                         </AnchorPane>
                   </content>
                 </Tab>
-                <Tab text="Rendimiento de gestiones">
+                <Tab text="%label.managementsPerformance">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -132,26 +135,26 @@
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="572.0" prefWidth="483.0">
                                        <children>
-                                          <Label text="Gestiones a incluir" />
+                                          <Label text="%label.managementToInclude" />
                                           <HBox prefHeight="162.0" prefWidth="200.0">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <RadioButton fx:id="rdbAllManagements" mnemonicParsing="false" onAction="#onActionrdbAllManagements" selected="true" text="Todas las Gestiones" />
+                                                      <RadioButton fx:id="rdbAllManagements" mnemonicParsing="false" onAction="#onActionrdbAllManagements" selected="true" text="%rBtn.allManagements" />
                                                    </children>
                                                 </VBox>
                                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                                    <children>
-                                                      <RadioButton fx:id="rdbManagementsPerArea" mnemonicParsing="false" onAction="#onActionrdbManagementsPerArea" text="Gestiones por Area" />
+                                                      <RadioButton fx:id="rdbManagementsPerArea" mnemonicParsing="false" onAction="#onActionrdbManagementsPerArea" text="%rBtn.managementsPerArea" />
                                                    </children>
                                                 </VBox>
                                              </children>
                                           </HBox>
                                           <VBox fx:id="vBoxAreas" prefHeight="510.0" prefWidth="483.0">
                                              <children>
-                                                <TextField fx:id="txtFilterAreas" prefHeight="39.0" prefWidth="483.0" promptText="Nombre de Area">
+                                                <TextField fx:id="txtFilterAreas" prefHeight="39.0" prefWidth="483.0" promptText="%prompt.areaName">
                                                    <font>
-                                                      <Font size="14.0" />
+                                                      <Font size="18.0" />
                                                    </font>
                                                 </TextField>
                                                 <ListView fx:id="listViewAreas" prefHeight="214.0" prefWidth="483.0" VBox.vgrow="ALWAYS" />
@@ -161,7 +164,7 @@
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                                        <children>
-                                          <Button fx:id="btnGenerateReport2" mnemonicParsing="false" onAction="#onActionGenerateReport2" text="Generar reporte" />
+                                          <Button fx:id="btnGenerateReport2" mnemonicParsing="false" onAction="#onActionGenerateReport2" text="%button.generateReport" />
                                        </children>
                                     </VBox>
                                  </children>
@@ -172,7 +175,7 @@
                            </children></AnchorPane>
                   </content>
                 </Tab>
-                  <Tab text="Aprobaciones por usuario">
+                  <Tab text="%label.aprobationsByUser">
                     <content>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
@@ -180,8 +183,11 @@
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="532.0" prefWidth="489.0">
                                        <children>
-                                          <Label text="Usuarios" />
-                                          <TextField fx:id="txtFilterUser2" prefHeight="45.0" prefWidth="328.0" promptText="Nombre Completo" />
+                                          <Label text="%label.users" />
+                                          <TextField fx:id="txtFilterUser2" prefHeight="45.0" prefWidth="328.0" promptText="%prompt.completeName">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font></TextField>
                                           <ListView fx:id="listViewUserReport3" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                                        </children>
                                     </VBox>
@@ -189,17 +195,17 @@
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="73.0" prefWidth="298.0">
                                              <children>
-                                                <Label text="Incluir Aprobaciones" />
+                                                <Label text="%label.includeAprobations" />
                                              </children>
                                           </VBox>
-                                          <CheckBox fx:id="chkAprobationsApproveds" mnemonicParsing="false" text="Aprobadas" />
-                                          <CheckBox fx:id="chkAprobationsRejecteds" mnemonicParsing="false" text="Rechazadas" />
-                                          <CheckBox fx:id="chkAprobationsPendings" mnemonicParsing="false" text="Pendiente" />
+                                          <CheckBox fx:id="chkAprobationsApproveds" mnemonicParsing="false" text="%chk.approved" />
+                                          <CheckBox fx:id="chkAprobationsRejecteds" mnemonicParsing="false" text="%chk.rejected" />
+                                          <CheckBox fx:id="chkAprobationsPendings" mnemonicParsing="false" text="%chk.pending" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="532.0" prefWidth="258.0">
                                        <children>
-                                          <Button fx:id="btnGenerateReport3" mnemonicParsing="false" onAction="#onActionGenerateReport3" text="Generar Reporte" />
+                                          <Button fx:id="btnGenerateReport3" mnemonicParsing="false" onAction="#onActionGenerateReport3" text="%button.generateReport" />
                                        </children>
                                     </VBox>
                                  </children>
