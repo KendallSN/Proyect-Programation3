@@ -176,36 +176,21 @@ public class HomeController extends Controller implements Initializable {
 
     private void loadCompletedProcedures() {
         Response response = managementService.getManagements();
+
         allManagements = (List<ManagementDto>) response.getResult("Managements");
-
-        if (allManagements == null || allManagements.isEmpty()) {
-            System.out.println("No se encontraron gestiones completadas.");
-            return;
-        }
-
-        // Depuración: Verifica el tamaño y estado de los datos
-        System.out.println("Total gestiones obtenidas: " + allManagements.size());
 
         List<ManagementDto> completedProcedures = allManagements.stream()
                 .filter(mgt -> mgt.getUsrRequestingId().getUsrId().equals(userDto.getUsrId()))
-                .filter(mgt -> {
-                    String state = mgt.getMgtState();
-                    System.out.println("Estado de la gestión: " + state); // Verificar el estado
-                    return "Rejected".equals(state) || "Resolved".equals(state);
-                })
+                .filter(mgt -> "Rejected".equals(mgt.getMgtState()) || "Resolved".equals(mgt.getMgtState()))
                 .filter(mgt -> {
                     LocalDateTime solveDateTime = mgt.getMgtSolvedate();
-                    System.out.println("Fecha de resolución: " + solveDateTime); // Verificar la fecha
                     return solveDateTime != null && solveDateTime.toLocalDate().isAfter(LocalDate.now().minusWeeks(1));
                 })
                 .collect(Collectors.toList());
-
-        System.out.println("Total gestiones completadas filtradas: " + completedProcedures.size());
-
         clmIssueRequestedCompleted.setCellValueFactory(new PropertyValueFactory<>("mgtSubject"));
         clmDateRequestedCompleted.setCellValueFactory(new PropertyValueFactory<>("mgtCreationdate"));
+        
         clmAreaRequestedCompleted.setCellValueFactory(new PropertyValueFactory<>("areName"));
-
         observableCompletedProcedures = FXCollections.observableArrayList(completedProcedures);
         tblCompleteProcedures.setItems(observableCompletedProcedures);
     }
