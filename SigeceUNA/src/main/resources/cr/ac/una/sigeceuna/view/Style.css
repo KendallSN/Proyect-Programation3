@@ -5,7 +5,7 @@
     -fx-base-color-fourth:#24599c;
     -fx-base-color-fifth:#1c2130;
     -fx-color-background: #ec9999;
-    -fx-base-color-green:#8be8a4;
+    -fx-base-color-green:#75c48a;
     -fx-base-color-darkGreen:#0a6623;
 }
 
@@ -102,7 +102,7 @@
     -fx-border-radius: 20px;
 }
 .button-Save{
-  -fx-background-color:#8be8a4;
+  -fx-background-color:#97dcaa;
 }
 .button-Delete{
     -fx-background-color:#b72c2c;

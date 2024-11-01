@@ -76,7 +76,7 @@ public class HomeController extends Controller implements Initializable {
     //Services
     private ManagementService managementService = new ManagementService();
     private AreaService areService = new AreaService();
-    
+
     //Observables
     private ObservableList<ManagementDto> observableRequestedProcedures = FXCollections.observableArrayList();
     private ObservableList<ManagementDto> observablePendingAttentionProcedures = FXCollections.observableArrayList();
@@ -97,6 +97,7 @@ public class HomeController extends Controller implements Initializable {
         filterManagementsProceduresToaprove();
         filterManagementsAttend();
         loadAreasChoiceBox();
+        loadTables();
     }
 
     private void cleanObservableList() {
@@ -115,11 +116,11 @@ public class HomeController extends Controller implements Initializable {
 
     private void loadAreasChoiceBox() {
         Response response = areService.getAreas();
-        
+
         areas = (List<AreaDto>) response.getResult("Areas");
-        
+
         areaNames = areas.stream()
-                .map(AreaDto::getAreName) 
+                .map(AreaDto::getAreName)
                 .collect(Collectors.toList());
 
         observableAreas = FXCollections.observableArrayList(areaNames);
@@ -128,8 +129,10 @@ public class HomeController extends Controller implements Initializable {
 
     //Tables
     private void loadRequestedProcedures() {
-        allManagements = (List<ManagementDto>) managementService.getManagements().getResult("Managements");
 
+        Response response = managementService.getManagements();
+        allManagements = (List<ManagementDto>) response.getResult("Managements");
+        //Filtra
         List<ManagementDto> requestedProcedures = allManagements.stream()
                 .filter(mgt -> mgt.getUsrRequestingId().getUsrId().equals(userDto.getUsrId()))
                 .collect(Collectors.toList());
@@ -143,8 +146,10 @@ public class HomeController extends Controller implements Initializable {
     }
 
     private void loadPendingAttentionProcedures() {
-        allManagements = (List<ManagementDto>) managementService.getManagements().getResult("Managements");
 
+        Response response = managementService.getManagements();
+        allManagements = (List<ManagementDto>) response.getResult("Managements");
+        //Filtra
         List<ManagementDto> pendingAttentionProcedures = allManagements.stream()
                 .filter(mgt -> mgt.getUsrAssignedId().getUsrId().equals(userDto.getUsrId()))
                 .filter(mgt -> "In progress".equals(mgt.getMgtState()))
@@ -159,27 +164,43 @@ public class HomeController extends Controller implements Initializable {
     }
 
     private void loadProceduresToApprove() {
-        allManagements = (List<ManagementDto>) managementService.getManagementsToAprovedBy(userDto.getUsrId()).getResult("Managements");
+        Response response = managementService.getManagementsToAprovedBy(userDto.getUsrId());
+        allManagements = (List<ManagementDto>) response.getResult("Managements");
 
         clmIssueApprove.setCellValueFactory(new PropertyValueFactory<>("mgtSubject"));
         clmDateApprove.setCellValueFactory(new PropertyValueFactory<>("mgtCreationdate"));
 
         observableManagements = FXCollections.observableArrayList(allManagements);
-
         tblProceduresToApprove.setItems(observableManagements);
     }
 
     private void loadCompletedProcedures() {
-        allManagements = (List<ManagementDto>) managementService.getManagements().getResult("Managements");
+        Response response = managementService.getManagements();
+        allManagements = (List<ManagementDto>) response.getResult("Managements");
+
+        if (allManagements == null || allManagements.isEmpty()) {
+            System.out.println("No se encontraron gestiones completadas.");
+            return;
+        }
+
+        // Depuración: Verifica el tamaño y estado de los datos
+        System.out.println("Total gestiones obtenidas: " + allManagements.size());
 
         List<ManagementDto> completedProcedures = allManagements.stream()
                 .filter(mgt -> mgt.getUsrRequestingId().getUsrId().equals(userDto.getUsrId()))
-                .filter(mgt -> "Rejected".equals(mgt.getMgtState()) || "Resolved".equals(mgt.getMgtState()))
+                .filter(mgt -> {
+                    String state = mgt.getMgtState();
+                    System.out.println("Estado de la gestión: " + state); // Verificar el estado
+                    return "Rejected".equals(state) || "Resolved".equals(state);
+                })
                 .filter(mgt -> {
                     LocalDateTime solveDateTime = mgt.getMgtSolvedate();
+                    System.out.println("Fecha de resolución: " + solveDateTime); // Verificar la fecha
                     return solveDateTime != null && solveDateTime.toLocalDate().isAfter(LocalDate.now().minusWeeks(1));
                 })
                 .collect(Collectors.toList());
+
+        System.out.println("Total gestiones completadas filtradas: " + completedProcedures.size());
 
         clmIssueRequestedCompleted.setCellValueFactory(new PropertyValueFactory<>("mgtSubject"));
         clmDateRequestedCompleted.setCellValueFactory(new PropertyValueFactory<>("mgtCreationdate"));

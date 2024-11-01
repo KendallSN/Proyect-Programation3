@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="688.0" prefWidth="1143.0" styleClass="rootbackground" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.HomeController">
+<AnchorPane id="AnchorPane" prefHeight="688.0" prefWidth="1090.0" styleClass="rootbackground" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.HomeController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <styleClass>
@@ -43,16 +43,16 @@
             </HBox>
             <HBox layoutY="47.2" prefHeight="627.0" prefWidth="1124.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="47.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="616.0" prefWidth="617.0" HBox.hgrow="SOMETIMES">
+                  <VBox alignment="CENTER_LEFT" prefHeight="616.0" prefWidth="575.0" HBox.hgrow="SOMETIMES">
                      <children>
                         <Separator prefHeight="23.0" prefWidth="690.0" />
                         <Label styleClass="boldlabel" text="Requested procedures" />
-                        <ChoiceBox fx:id="choiceBoxAreas" prefHeight="68.0" prefWidth="694.0" styleClass="choicebox" />
-                        <TableView fx:id="tblRequestedProcedures" prefHeight="259.0" prefWidth="690.0">
+                        <ChoiceBox fx:id="choiceBoxAreas" prefHeight="31.0" prefWidth="577.0" styleClass="choicebox" />
+                        <TableView fx:id="tblRequestedProcedures" prefHeight="235.0" prefWidth="575.0">
                            <columns>
-                              <TableColumn fx:id="clmIssueRequested" prefWidth="205.6000016927719" text="Issue" />
-                              <TableColumn fx:id="clmDateRequested" prefWidth="218.40000915527344" text="Maximum date to resolve" />
-                              <TableColumn fx:id="clmAreaRequested" minWidth="0.0" prefWidth="187.99996948242188" text="Area" />
+                              <TableColumn fx:id="clmIssueRequested" prefWidth="204.79998815059662" text="Issue" />
+                              <TableColumn fx:id="clmDateRequested" prefWidth="202.40005493164062" text="Maximum date to resolve" />
+                              <TableColumn fx:id="clmAreaRequested" minWidth="0.0" prefWidth="163.99996948242188" text="Area" />
                            </columns>
                         </TableView>
                         <Separator prefHeight="48.0" prefWidth="690.0" />
@@ -64,8 +64,8 @@
                         <TableView fx:id="tblPendingProcedures" prefHeight="284.0" prefWidth="531.0">
                            <columns>
                               <TableColumn fx:id="clmIssuePending" prefWidth="209.6000016927719" text="Issue" />
-                              <TableColumn fx:id="clmDatePending" minWidth="0.0" prefWidth="184.00010681152344" text="Solution date" />
-                              <TableColumn fx:id="clmMaxDatePendingAttention" prefWidth="223.19992065429688" text="Maximum date to resolve" />
+                              <TableColumn fx:id="clmDatePending" minWidth="0.0" prefWidth="143.20004272460938" text="Solution date" />
+                              <TableColumn fx:id="clmMaxDatePendingAttention" prefWidth="220.79995727539062" text="Maximum date to resolve" />
                            </columns>
                            <VBox.margin>
                               <Insets />
@@ -85,7 +85,7 @@
                         <TableView fx:id="tblProceduresToApprove" prefHeight="278.0" prefWidth="690.0">
                            <columns>
                               <TableColumn fx:id="clmIssueApprove" prefWidth="195.99994200468063" text="Issue" />
-                              <TableColumn fx:id="clmDateApprove" prefWidth="276.79978942871094" text="Maximum date to resolve" />
+                              <TableColumn fx:id="clmDateApprove" prefWidth="265.5998077392578" text="Maximum date to resolve" />
                            </columns>
                            <VBox.margin>
                               <Insets />
@@ -97,7 +97,7 @@
                            <columns>
                               <TableColumn fx:id="clmIssueRequestedCompleted" prefWidth="142.39996641874313" text="Issue" />
                               <TableColumn fx:id="clmDateRequestedCompleted" prefWidth="203.1999969482422" text="Solve Date " />
-                              <TableColumn fx:id="clmAreaRequestedCompleted" minWidth="0.0" prefWidth="127.19997558593752" text="Area" />
+                              <TableColumn fx:id="clmAreaRequestedCompleted" minWidth="0.0" prefWidth="115.1998291015625" text="Area" />
                            </columns>
                            <VBox.margin>
                               <Insets />
