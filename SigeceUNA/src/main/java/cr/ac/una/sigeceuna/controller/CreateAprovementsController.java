@@ -273,11 +273,16 @@ public class CreateAprovementsController extends Controller implements Initializ
 
     @FXML
     void onActionBtnFilterAprobations(ActionEvent event) {
-        String textSearchString = this.txt_FilterAprobations.getText().toLowerCase();
-        if (!textSearchString.isEmpty()) {
+        String textSearchString = this.txt_FilterAprobations.getText().toLowerCase();    
+    // Si el campo de texto está vacío, muestra la lista completa
+        if (textSearchString.isEmpty()) {
+            this.observableManagementaprobationDto = FXCollections.observableArrayList(this.mgtmanagementaprobationsList);
+            this.tblV_Aprobations.setItems(observableManagementaprobationDto);
+            return;
+        }
+        else {
             try {
                 Long searchId = Long.valueOf(textSearchString);
-
                 // Filter the orignal List
                 List<ManagementaprobationDto> filteredList = this.mgtmanagementaprobationsList.stream()
                     .filter(a -> a.getMgtId().equals(searchId))

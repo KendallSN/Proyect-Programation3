@@ -204,14 +204,11 @@ public class HomeController extends Controller implements Initializable {
         tblRequestedProcedures.setItems(filteredRequestedManagements);
         
         this.choiceBoxAreas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-    // Configura el filtro basado en la selección del ChoiceBox
         this.filteredRequestedManagements.setPredicate(managementDto -> {
-        // Si no hay ninguna selección, muestra todos los elementos
         if (newValue == null || newValue.isEmpty()) {
             return true;
         }
         
-        // Filtra solo los objetos cuyo areaName coincide con la selección en el ChoiceBox
         return managementDto.getAreName().equals(newValue);
     });
 });
@@ -247,8 +244,6 @@ public class HomeController extends Controller implements Initializable {
                             LocalDate today = LocalDate.now();
                             LocalDate maxDate = item.getMgtMaxdatetosolve().toLocalDate();
                             long daysRemaining = ChronoUnit.DAYS.between(today, maxDate);
-                            System.out.println("daysRemaining: " + daysRemaining);
-
                             // 1 day left
                             if (daysRemaining == 1) {
                                 setStyle("-fx-background-color: red;");
