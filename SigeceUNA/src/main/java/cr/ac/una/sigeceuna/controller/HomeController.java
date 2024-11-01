@@ -6,23 +6,28 @@ import cr.ac.una.sigeceuna.model.UserDto;
 import cr.ac.una.sigeceuna.service.AreaService;
 import cr.ac.una.sigeceuna.service.ManagementService;
 import cr.ac.una.sigeceuna.util.AppContext;
+import cr.ac.una.sigeceuna.util.FlowController;
 import cr.ac.una.sigeceuna.util.Response;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 
 public class HomeController extends Controller implements Initializable {
 
@@ -66,7 +71,8 @@ public class HomeController extends Controller implements Initializable {
     private TableColumn<ManagementDto, String> clmAreaRequestedCompleted;
 
     //Dtos 
-    private UserDto userDto = (UserDto) AppContext.getInstance().get("User");
+    private UserDto userDto;
+    private ManagementDto managementDtoSelected;
 
     //Lists to take information from the database
     List<ManagementDto> allManagements;
@@ -83,6 +89,8 @@ public class HomeController extends Controller implements Initializable {
     private ObservableList<ManagementDto> observableCompletedProcedures = FXCollections.observableArrayList();
     private ObservableList<ManagementDto> observableManagements = FXCollections.observableArrayList();
     private ObservableList<String> observableAreas = FXCollections.observableArrayList();
+    
+    FilteredList<ManagementDto> filteredRequestedManagements;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -91,13 +99,61 @@ public class HomeController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-
+        this.userDto = (UserDto) AppContext.getInstance().get("User");
+        this.managementDtoSelected=new ManagementDto();
         cleanObservableList();
         filterManagementsRequested();
         filterManagementsProceduresToaprove();
         filterManagementsAttend();
         loadAreasChoiceBox();
         loadTables();
+        tableListeners();
+    }
+    
+    private void tableListeners(){
+        //Table selections
+         this.tblRequestedProcedures.getSelectionModel().selectedItemProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    this.managementDtoSelected = newValue;
+                    AppContext.getInstance().set("ManagementSelected", newValue);
+                    FlowController.getInstance().goView("ManagementView");
+                }
+            }
+        );
+         
+        //Table selections
+         this.tblProceduresToApprove.getSelectionModel().selectedItemProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    this.managementDtoSelected = newValue;
+                    AppContext.getInstance().set("ManagementSelected", newValue);
+                    FlowController.getInstance().goView("ManagementView");
+                }
+            }
+        );
+         
+        //Table selections
+         this.tblPendingProcedures.getSelectionModel().selectedItemProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    this.managementDtoSelected = newValue;
+                    AppContext.getInstance().set("ManagementSelected", newValue);
+                    FlowController.getInstance().goView("ManagementView");
+                }
+            }
+        );
+        
+         //Table selections
+         this.tblCompleteProcedures.getSelectionModel().selectedItemProperty().addListener(
+            (observable, oldValue, newValue) -> {
+                if (newValue != null) {
+                    this.managementDtoSelected = newValue;
+                    AppContext.getInstance().set("ManagementSelected", newValue);
+                    FlowController.getInstance().goView("ManagementView");
+                }
+            }
+        );
     }
 
     private void cleanObservableList() {
@@ -124,6 +180,7 @@ public class HomeController extends Controller implements Initializable {
                 .collect(Collectors.toList());
 
         observableAreas = FXCollections.observableArrayList(areaNames);
+        observableAreas.add("");
         choiceBoxAreas.setItems(observableAreas);
     }
 
@@ -134,7 +191,8 @@ public class HomeController extends Controller implements Initializable {
         allManagements = (List<ManagementDto>) response.getResult("Managements");
         //Filtra
         List<ManagementDto> requestedProcedures = allManagements.stream()
-                .filter(mgt -> mgt.getUsrRequestingId().getUsrId().equals(userDto.getUsrId()))
+                .filter(mgt -> mgt.getUsrRequestingId().getUsrId().equals(userDto.getUsrId()) &&
+                        mgt.getMgtState().equals("In progress"))
                 .collect(Collectors.toList());
 
         clmIssueRequested.setCellValueFactory(new PropertyValueFactory<>("mgtSubject"));
@@ -142,7 +200,21 @@ public class HomeController extends Controller implements Initializable {
         clmAreaRequested.setCellValueFactory(new PropertyValueFactory<>("areName"));
 
         observableRequestedProcedures = FXCollections.observableArrayList(requestedProcedures);
-        tblRequestedProcedures.setItems(observableRequestedProcedures);
+        this.filteredRequestedManagements = new FilteredList<>(this.observableRequestedProcedures, p -> true);
+        tblRequestedProcedures.setItems(filteredRequestedManagements);
+        
+        this.choiceBoxAreas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+    // Configura el filtro basado en la selección del ChoiceBox
+        this.filteredRequestedManagements.setPredicate(managementDto -> {
+        // Si no hay ninguna selección, muestra todos los elementos
+        if (newValue == null || newValue.isEmpty()) {
+            return true;
+        }
+        
+        // Filtra solo los objetos cuyo areaName coincide con la selección en el ChoiceBox
+        return managementDto.getAreName().equals(newValue);
+    });
+});
     }
 
     private void loadPendingAttentionProcedures() {
@@ -161,6 +233,39 @@ public class HomeController extends Controller implements Initializable {
 
         observablePendingAttentionProcedures = FXCollections.observableArrayList(pendingAttentionProcedures);
         tblPendingProcedures.setItems(observablePendingAttentionProcedures);
+        
+        tblPendingProcedures.setRowFactory(new Callback<TableView<ManagementDto>, TableRow<ManagementDto>>() {
+            @Override
+            public TableRow<ManagementDto> call(TableView<ManagementDto> tableView) {
+                return new TableRow<>() {
+                    @Override
+                    protected void updateItem(ManagementDto item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item == null || item.getMgtMaxdatetosolve() == null) {
+                            setStyle("");
+                        } else {
+                            LocalDate today = LocalDate.now();
+                            LocalDate maxDate = item.getMgtMaxdatetosolve().toLocalDate();
+                            long daysRemaining = ChronoUnit.DAYS.between(today, maxDate);
+                            System.out.println("daysRemaining: " + daysRemaining);
+
+                            // 1 day left
+                            if (daysRemaining == 1) {
+                                setStyle("-fx-background-color: red;");
+                            }
+                            // 1 week left
+                            else if (daysRemaining > 1 && daysRemaining <=7) {
+                                setStyle("-fx-background-color: yellow;");
+                            }
+                            // More than 1 week
+                            else {
+                                setStyle("");
+                            }
+                        }
+                    }
+                };
+            }
+        });
     }
 
     private void loadProceduresToApprove() {
@@ -168,7 +273,7 @@ public class HomeController extends Controller implements Initializable {
         allManagements = (List<ManagementDto>) response.getResult("Managements");
 
         clmIssueApprove.setCellValueFactory(new PropertyValueFactory<>("mgtSubject"));
-        clmDateApprove.setCellValueFactory(new PropertyValueFactory<>("mgtCreationdate"));
+        clmDateApprove.setCellValueFactory(new PropertyValueFactory<>("mgtMaxdatetosolve"));
 
         observableManagements = FXCollections.observableArrayList(allManagements);
         tblProceduresToApprove.setItems(observableManagements);

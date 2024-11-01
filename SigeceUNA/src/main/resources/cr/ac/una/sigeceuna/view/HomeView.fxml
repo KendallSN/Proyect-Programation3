@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="688.0" prefWidth="1090.0" styleClass="rootbackground" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.HomeController">
+<AnchorPane id="AnchorPane" prefHeight="688.0" prefWidth="1090.0" styleClass="rootbackground" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.HomeController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <styleClass>
@@ -19,23 +19,23 @@
             <String fx:value="shadoweffect" />
          </styleClass>
          <children>
-            <HBox prefHeight="40.0" prefWidth="1124.0" spacing="2.0" AnchorPane.bottomAnchor="634.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+            <HBox spacing="2.0" AnchorPane.bottomAnchor="634.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                <children>
-                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="282.0" styleClass="greybackground">
+                  <HBox alignment="CENTER" styleClass="greybackground" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label prefHeight="31.0" prefWidth="240.0" text="Requested procedures in progress:" />
+                        <Label text="%label.requestedManagementsInProgress" />
                         <Label fx:id="txtManagementRequested" prefHeight="30.0" prefWidth="36.0" text="0" textAlignment="CENTER" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="206.0" styleClass="greybackground">
+                  <HBox alignment="CENTER" styleClass="greybackground" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Procedures to approve:" />
+                        <Label text="%label.managementsToApprove" />
                         <Label fx:id="txtManagementToApprove" prefHeight="31.0" prefWidth="38.0" text="0" textAlignment="CENTER" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="33.0" prefWidth="197.0" styleClass="greybackground">
+                  <HBox alignment="CENTER" styleClass="greybackground" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label text="Procedures to attend:" />
+                        <Label text="%label.managementsToAttend" />
                         <Label fx:id="txtManagementToAttend" prefHeight="31.0" prefWidth="42.0" text="0" textAlignment="CENTER" />
                      </children>
                   </HBox>
@@ -46,66 +46,81 @@
                   <VBox alignment="CENTER_LEFT" prefHeight="616.0" prefWidth="575.0" HBox.hgrow="SOMETIMES">
                      <children>
                         <Separator prefHeight="23.0" prefWidth="690.0" />
-                        <Label styleClass="boldlabel" text="Requested procedures" />
-                        <ChoiceBox fx:id="choiceBoxAreas" prefHeight="31.0" prefWidth="577.0" styleClass="choicebox" />
-                        <TableView fx:id="tblRequestedProcedures" prefHeight="235.0" prefWidth="575.0">
+                        <Label styleClass="boldlabel" text="%label.requestedManagementsInProgress" />
+                        <ChoiceBox fx:id="choiceBoxAreas" focusTraversable="false" prefHeight="31.0" prefWidth="577.0" styleClass="choicebox" />
+                        <TableView fx:id="tblRequestedProcedures" focusTraversable="false" prefHeight="235.0" prefWidth="575.0">
                            <columns>
-                              <TableColumn fx:id="clmIssueRequested" prefWidth="204.79998815059662" text="Issue" />
-                              <TableColumn fx:id="clmDateRequested" prefWidth="202.40005493164062" text="Maximum date to resolve" />
-                              <TableColumn fx:id="clmAreaRequested" minWidth="0.0" prefWidth="163.99996948242188" text="Area" />
+                              <TableColumn fx:id="clmIssueRequested" prefWidth="204.79998815059662" text="%tblC.subject" />
+                              <TableColumn fx:id="clmDateRequested" prefWidth="202.40005493164062" text="%tblC.maxDateToSolve" />
+                              <TableColumn fx:id="clmAreaRequested" minWidth="0.0" prefWidth="163.99996948242188" text="%tblC.area" />
                            </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                         <Separator prefHeight="48.0" prefWidth="690.0" />
-                        <Label onDragDetected="#Pending" styleClass="boldlabel" text="Procedures pending attention">
+                        <Label onDragDetected="#Pending" styleClass="boldlabel" text="%label.managementsToAttend">
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
                         </Label>
-                        <TableView fx:id="tblPendingProcedures" prefHeight="284.0" prefWidth="531.0">
+                        <TableView fx:id="tblPendingProcedures" focusTraversable="false" prefHeight="284.0" prefWidth="531.0">
                            <columns>
-                              <TableColumn fx:id="clmIssuePending" prefWidth="209.6000016927719" text="Issue" />
-                              <TableColumn fx:id="clmDatePending" minWidth="0.0" prefWidth="143.20004272460938" text="Solution date" />
-                              <TableColumn fx:id="clmMaxDatePendingAttention" prefWidth="220.79995727539062" text="Maximum date to resolve" />
+                              <TableColumn fx:id="clmIssuePending" prefWidth="209.6000016927719" text="%tblC.subject" />
+                              <TableColumn fx:id="clmDatePending" minWidth="0.0" prefWidth="143.20004272460938" text="%tblC.creationDate" />
+                              <TableColumn fx:id="clmMaxDatePendingAttention" prefWidth="220.79995727539062" text="%tblC.maxDateToSolve" />
                            </columns>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children>
                   </VBox>
-                  <Separator orientation="VERTICAL" prefHeight="616.0" prefWidth="3.0" />
-                  <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                  <Separator orientation="VERTICAL" prefHeight="616.0" prefWidth="3.0">
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin></Separator>
+                  <VBox prefHeight="613.0" prefWidth="464.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Separator prefWidth="200.0">
                            <VBox.margin>
                               <Insets top="2.0" />
                            </VBox.margin>
                         </Separator>
-                        <Label styleClass="boldlabel" text="Procedures to approve" />
-                        <TableView fx:id="tblProceduresToApprove" prefHeight="278.0" prefWidth="690.0">
+                        <Label styleClass="boldlabel" text="%label.managementsToApprove" />
+                        <TableView fx:id="tblProceduresToApprove" focusTraversable="false" prefHeight="258.0" prefWidth="464.0">
                            <columns>
-                              <TableColumn fx:id="clmIssueApprove" prefWidth="195.99994200468063" text="Issue" />
-                              <TableColumn fx:id="clmDateApprove" prefWidth="265.5998077392578" text="Maximum date to resolve" />
+                              <TableColumn fx:id="clmIssueApprove" prefWidth="195.99994200468063" text="%tblC.subject" />
+                              <TableColumn fx:id="clmDateApprove" prefWidth="265.5998077392578" text="%tblC.maxDateToSolve" />
                            </columns>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                         <Separator prefHeight="38.0" prefWidth="531.0" />
-                        <Label styleClass="boldlabel" text="Requested procedures completed" />
-                        <TableView fx:id="tblCompleteProcedures" prefHeight="272.0" prefWidth="531.0">
+                        <Label styleClass="boldlabel" text="%label.endOnTheLastWeek" />
+                        <TableView fx:id="tblCompleteProcedures" focusTraversable="false" prefHeight="272.0" prefWidth="464.0">
                            <columns>
-                              <TableColumn fx:id="clmIssueRequestedCompleted" prefWidth="142.39996641874313" text="Issue" />
-                              <TableColumn fx:id="clmDateRequestedCompleted" prefWidth="203.1999969482422" text="Solve Date " />
-                              <TableColumn fx:id="clmAreaRequestedCompleted" minWidth="0.0" prefWidth="115.1998291015625" text="Area" />
+                              <TableColumn fx:id="clmIssueRequestedCompleted" prefWidth="142.39996641874313" text="%tblC.subject" />
+                              <TableColumn fx:id="clmDateRequestedCompleted" prefWidth="203.1999969482422" text="%tblC.solutionDate" />
+                              <TableColumn fx:id="clmAreaRequestedCompleted" minWidth="0.0" prefWidth="115.1998291015625" text="%tblC.area" />
                            </columns>
                            <VBox.margin>
                               <Insets />
                            </VBox.margin>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
                         </TableView>
                      </children>
                      <HBox.margin>
-                        <Insets left="5.0" top="35.0" />
+                        <Insets left="5.0" />
                      </HBox.margin>
                   </VBox>
                </children>

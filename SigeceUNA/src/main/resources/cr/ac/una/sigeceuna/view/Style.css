@@ -33,6 +33,16 @@
 #labelEnterEmail{
     -fx-font-size: 20px;
 }
+#lbl_expired {
+    -fx-background-color: #FFCDD2;  /* Fondo rojo claro */
+    -fx-text-fill: #B71C1C;         /* Texto rojo oscuro */
+    -fx-font-weight: bold;          /* Texto en negrita */
+    -fx-border-color: #B71C1C;      /* Borde rojo oscuro */
+    -fx-border-width: 2px;          /* Grosor del borde */
+    -fx-padding: 5px;               /* Espacio alrededor del texto */
+    -fx-border-radius: 5px;         /* Bordes redondeados */
+    -fx-background-radius: 5px;
+}
 .boldlabel{
      -fx-font-weight: bold;
 }

@@ -20,6 +20,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -56,6 +58,20 @@ public class LoginController extends Controller implements Initializable {
     public void initialize() {
         txtUser.clear();
         txtPassword.clear();
+    }
+    
+    @FXML
+    void onKeyPressedPassword(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER && !this.txtPassword.getText().isBlank()) {
+            validateUser();
+        }
+    }
+
+    @FXML
+    void onKeyPressedUser(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER && !this.txtUser.getText().isBlank()) {
+            validateUser();
+        }
     }
 
     @FXML

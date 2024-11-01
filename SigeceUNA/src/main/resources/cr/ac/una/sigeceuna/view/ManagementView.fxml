@@ -22,8 +22,9 @@
                <children>
                   <VBox alignment="TOP_CENTER" spacing="20.0" HBox.hgrow="SOMETIMES">
                      <children>
-                        <HBox alignment="TOP_CENTER" prefHeight="100.0" prefWidth="200.0">
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
+                              <Label fx:id="lbl_expired" alignment="CENTER" contentDisplay="CENTER" focusTraversable="false" text="%label.expired" textAlignment="CENTER" textFill="RED" visible="false" />
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="256.0" text="%label.managements" />
                               <HBox alignment="CENTER" prefHeight="48.0" prefWidth="405.0" spacing="10.0">
                                  <children>

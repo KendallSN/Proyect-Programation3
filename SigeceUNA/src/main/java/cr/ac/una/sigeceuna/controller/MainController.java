@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
@@ -29,13 +30,26 @@ public class MainController extends Controller implements Initializable {
     private Button btnExit;
     @FXML
     private BorderPane root;
+    
+    @FXML
+    private Label lbl_UserName;
+    
+    @FXML
+    private Label lbl_role;
+
     private ResourceBundle bundle;
+    private UserDto loggedUser;
+    private String currentRole;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.bundle=FlowController.getIdioma();
+        this.currentRole=(String) AppContext.getInstance().get("Role");
+        this.loggedUser=(UserDto) AppContext.getInstance().get("User");
+        this.lbl_UserName.setText(this.loggedUser.getUsrName()+ " " + this.loggedUser.getUsrSurname() + " " + this.loggedUser.getUsrLastname());
+        this.lbl_role.setText(this.bundle.getString("role") + " " + this.currentRole);
     }
 
     @Override

@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -100,6 +101,9 @@ public class ManagementController extends Controller implements Initializable{
     private Label lbl_Resolved;
     
     @FXML
+    private Label lbl_expired;
+    
+    @FXML
     private Button btn_OnHold;
     
     @FXML
@@ -133,6 +137,7 @@ public class ManagementController extends Controller implements Initializable{
     @Override
     public void initialize() {
         this.bundle=FlowController.getIdioma();
+        this.lbl_expired.setVisible(false);
         this.lbl_Resolved.setVisible(false);
         this.txt_SolvedDate.setVisible(false);
         this.btn_Resolved.setVisible(false);
@@ -271,6 +276,17 @@ public class ManagementController extends Controller implements Initializable{
         }
     }
     
+    private void checkIfManagementIsExpired() {
+        LocalDateTime today = LocalDateTime.now();
+        LocalDateTime maxDateToSolve = this.managementSelected.getMgtMaxdatetosolve();
+
+        if (maxDateToSolve.isBefore(today)) {
+            this.lbl_expired.setVisible(true);
+        } else {
+            this.lbl_expired.setVisible(false);
+        }
+    }
+    
     private void fillSpaces(){
         this.managementaprovationsList=new ArrayList<>();
         this.observableUsertoAproveDto.clear();
@@ -288,6 +304,7 @@ public class ManagementController extends Controller implements Initializable{
             if(this.managementSelected.getMgtState().equals("Resolved")){
                 filltxt_SolvedDate();
             }
+            checkIfManagementIsExpired();
             this.txt_Subject.setText(this.managementSelected.getMgtSubject());
             this.txtA_Description.setText(this.managementSelected.getMgtDescription());
             this.txt_ID.setText(this.managementSelected.getMgtId().toString());
@@ -382,7 +399,8 @@ public class ManagementController extends Controller implements Initializable{
             if(this.managementSelected.getMgtState().equals("In progress") && 
                 this.managementSelected.getUsrAssignedId().getUsrId().equals(this.loggedUser.getUsrId())){
                 if(this.managementSelected.getMgtSolvedate()==null && !this.managementSelected.getMgtMaxdatetosolve().isBefore(LocalDateTime.now())){
-                    this.btn_Resolved.setVisible(true);
+                        this.btn_Resolved.setVisible(true);
+                        this.lbl_expired.setVisible(false);
                 }
             }
         }
