@@ -186,7 +186,6 @@ public class HomeController extends Controller implements Initializable {
 
     //Tables
     private void loadRequestedProcedures() {
-
         Response response = managementService.getManagements();
         allManagements = (List<ManagementDto>) response.getResult("Managements");
         //Filtra
@@ -204,15 +203,15 @@ public class HomeController extends Controller implements Initializable {
         tblRequestedProcedures.setItems(filteredRequestedManagements);
         
         this.choiceBoxAreas.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-        this.filteredRequestedManagements.setPredicate(managementDto -> {
-        if (newValue == null || newValue.isEmpty()) {
-            return true;
-        }
-        
-        return managementDto.getAreName().equals(newValue);
-    });
-});
-    }
+            this.filteredRequestedManagements.setPredicate(managementDto -> {
+            if (newValue == null || newValue.isEmpty()) {
+                return true;
+            }
+
+            return managementDto.getAreName().equals(newValue);
+            });
+        });
+   }
 
     private void loadPendingAttentionProcedures() {
 
@@ -229,6 +228,7 @@ public class HomeController extends Controller implements Initializable {
         clmMaxDatePendingAttention.setCellValueFactory(new PropertyValueFactory<>("mgtMaxdatetosolve"));
 
         observablePendingAttentionProcedures = FXCollections.observableArrayList(pendingAttentionProcedures);
+        FXCollections.sort(observablePendingAttentionProcedures, (o1, o2) -> o1.getMgtMaxdatetosolve().compareTo(o2.getMgtMaxdatetosolve()));
         tblPendingProcedures.setItems(observablePendingAttentionProcedures);
         
         tblPendingProcedures.setRowFactory(new Callback<TableView<ManagementDto>, TableRow<ManagementDto>>() {
@@ -238,23 +238,31 @@ public class HomeController extends Controller implements Initializable {
                     @Override
                     protected void updateItem(ManagementDto item, boolean empty) {
                         super.updateItem(item, empty);
+                        getStyleClass().removeAll("gray", "red", "yellow");
                         if (item == null || item.getMgtMaxdatetosolve() == null) {
                             setStyle("");
                         } else {
-                            LocalDate today = LocalDate.now();
-                            LocalDate maxDate = item.getMgtMaxdatetosolve().toLocalDate();
-                            long daysRemaining = ChronoUnit.DAYS.between(today, maxDate);
-                            // 1 day left
-                            if (daysRemaining == 1) {
-                                setStyle("-fx-background-color: red;");
-                            }
-                            // 1 week left
-                            else if (daysRemaining > 1 && daysRemaining <=7) {
-                                setStyle("-fx-background-color: yellow;");
-                            }
-                            // More than 1 week
+                            LocalDateTime now = LocalDateTime.now();
+                            LocalDateTime maxDateTime = item.getMgtMaxdatetosolve();
+
+                            // Calcular los días y minutos restantes
+                            long daysRemaining = ChronoUnit.DAYS.between(now, maxDateTime);
+                            long minutesRemaining = ChronoUnit.MINUTES.between(now, maxDateTime);
+                            // Si la fecha ya se venció
+                            if (minutesRemaining < 0) {
+                                getStyleClass().add("gray");
+                            } 
+                            // 1 día restante o menos de 24 horas restantes
+                            else if (daysRemaining == 0 && minutesRemaining > 0 && minutesRemaining <= 1440) {
+                                getStyleClass().add("red");
+                            } 
+                            // Entre 2 y 7 días restantes
+                            else if (daysRemaining >= 1 && daysRemaining <= 7) {
+                                getStyleClass().add("yellow");
+                            } 
+                            // Más de una semana restante
                             else {
-                                setStyle("");
+                                getStyleClass().removeAll("gray", "red", "yellow");
                             }
                         }
                     }
@@ -271,6 +279,7 @@ public class HomeController extends Controller implements Initializable {
         clmDateApprove.setCellValueFactory(new PropertyValueFactory<>("mgtMaxdatetosolve"));
 
         observableManagements = FXCollections.observableArrayList(allManagements);
+        FXCollections.sort(observableManagements, (o1, o2) -> o1.getMgtMaxdatetosolve().compareTo(o2.getMgtMaxdatetosolve()));
         tblProceduresToApprove.setItems(observableManagements);
     }
 
@@ -292,6 +301,7 @@ public class HomeController extends Controller implements Initializable {
         
         clmAreaRequestedCompleted.setCellValueFactory(new PropertyValueFactory<>("areName"));
         observableCompletedProcedures = FXCollections.observableArrayList(completedProcedures);
+        FXCollections.sort(observableCompletedProcedures, (o1, o2) -> o1.getMgtSolvedate().compareTo(o2.getMgtSolvedate()));
         tblCompleteProcedures.setItems(observableCompletedProcedures);
     }
 

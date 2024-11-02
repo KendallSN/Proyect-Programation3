@@ -14,6 +14,7 @@ import cr.ac.una.sigeceuna.util.Response;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -72,8 +73,9 @@ public class AprovementsController extends Controller implements Initializable{
         this.loggedUser=(UserDto) AppContext.getInstance().get("User");    
         
         this.managementaprobationsList=((List<ManagementaprobationDto>) this.managementaprobationService.getManagementaprobations().getResult("Managementaprobations"))
-                .stream().filter(m->m.getUsrToaproveId().getUsrId().equals(this.loggedUser.getUsrId())).toList();
+                .stream().filter(m->m.getUsrToaproveId().getUsrId().equals(this.loggedUser.getUsrId())).toList();      
         this.observableManagementaprobationsDto.addAll(managementaprobationsList);
+        FXCollections.sort(observableManagementaprobationsDto, Comparator.comparing(ManagementaprobationDto::getMgtaId));
 
         //Initialize TableView
         tblC_ID.setCellValueFactory(new PropertyValueFactory<>("mgtaId"));

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.lang.String?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -13,18 +14,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1000.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.CalendarController">
+<AnchorPane id="AnchorPane" prefHeight="643.0" prefWidth="1000.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.CalendarController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+                  <HBox VBox.vgrow="NEVER">
                      <children>
                         <VBox alignment="TOP_CENTER" prefHeight="610.0" prefWidth="314.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="68.0" prefWidth="240.0" text="%label.calendar" textAlignment="CENTER" />
-                              <DatePicker fx:id="datePicker_ManagementCalendar" centerShape="false" focusTraversable="false" prefHeight="54.0" prefWidth="299.0" promptText="%prompt.managementsCalendar">
+                              <Label alignment="CENTER" prefHeight="68.0" prefWidth="240.0" styleClass="label-title" text="%label.calendar" textAlignment="CENTER" />
+                              <DatePicker fx:id="datePicker_ManagementCalendar" centerShape="false" focusTraversable="false" promptText="%prompt.managementsCalendar">
                                  <styleClass>
                                     <String fx:value="label-small" />
                                     <String fx:value="custom-date-picker" />
@@ -32,7 +33,7 @@
                            </children>
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="SOMETIMES">
+                        <VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="SOMETIMES">
                            <children>
                               <TitledPane fx:id="titledPane_Information" expanded="false" focusTraversable="false" prefHeight="142.0" prefWidth="670.0" text="%tittledPane.howManagementsCalendarWorks">
                                 <content>
@@ -45,9 +46,12 @@
                                  <font>
                                     <Font size="18.0" />
                                  </font>
+                                 <VBox.margin>
+                                    <Insets right="5.0" />
+                                 </VBox.margin>
                               </TitledPane>
-                              <Label styleClass="label-small" text="%label.dailyManagements" />
-                              <TableView fx:id="tblV_Managements" focusTraversable="false" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
+                              <Label styleClass="label-title" text="%label.dailyManagements" />
+                              <TableView fx:id="tblV_Managements" focusTraversable="false" VBox.vgrow="SOMETIMES">
                                 <columns>
                                   <TableColumn fx:id="tblC_ID" prefWidth="75.0" text="%tblC.id" />
                                   <TableColumn fx:id="tblC_Subject" prefWidth="75.0" text="%tblC.subject" />
@@ -56,6 +60,9 @@
                                  <columnResizePolicy>
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
+                                 <VBox.margin>
+                                    <Insets right="5.0" />
+                                 </VBox.margin>
                               </TableView>
                            </children>
                         </VBox>

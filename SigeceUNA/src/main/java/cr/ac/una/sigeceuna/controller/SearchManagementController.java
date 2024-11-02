@@ -21,6 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
@@ -146,6 +147,7 @@ public class SearchManagementController extends Controller implements Initializa
         
         fillManagementDtoList();
         this.observableManagementsDto.addAll(managementsDtoList);
+        FXCollections.sort(observableManagementsDto,Comparator.comparing(ManagementDto::getMgtId));
         this.tblV_Managements.setItems(observableManagementsDto);
         
         //Table selections

@@ -87,13 +87,17 @@ public class CalendarController extends Controller implements Initializable{
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-
+                setStyle("");
+                setTooltip(null);
+                setText(date != null ? date.getDayOfMonth() + "" : "");
                 if (!empty) {
                     List<ManagementDto> dayManagements = managementsList.stream()
                             .filter(m -> m.getMgtMaxdatetosolve().toLocalDate().equals(date))
                             .collect(Collectors.toList());
                     if (!dayManagements.isEmpty()) {
                         StringBuilder managementsSubject = new StringBuilder();
+                        boolean hasExpired = dayManagements.stream()
+                        .anyMatch(management -> management.getMgtMaxdatetosolve().isBefore(LocalDateTime.now()));
                         for (ManagementDto management : dayManagements) {
                             managementsSubject.append(management.getMgtSubject()).append("\n");
                         }
@@ -101,7 +105,11 @@ public class CalendarController extends Controller implements Initializable{
                         Tooltip tooltip = new Tooltip(managementsSubject.toString());
                         tooltip.setWrapText(true);
                         setTooltip(tooltip);
-                        setStyle("-fx-background-color: #FFD700;");
+                        if (hasExpired) {
+                            setStyle("-fx-background-color: gray;");
+                        } else {
+                            setStyle("-fx-background-color: #FFD700;");
+                        }
                         setText(getText() + " *");
                     }
                 }

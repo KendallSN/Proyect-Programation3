@@ -20,7 +20,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <Label alignment="CENTER" prefHeight="68.0" prefWidth="285.0" text="%label.aprobations" textAlignment="CENTER" />
+                              <Label alignment="CENTER" prefHeight="68.0" prefWidth="285.0" styleClass="label-title" text="%label.aprobations" textAlignment="CENTER" />
                               <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnNewAprovement" text="%button.new" />
                            </children>
                         </HBox>

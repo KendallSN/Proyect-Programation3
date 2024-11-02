@@ -12,6 +12,7 @@ import cr.ac.una.sigeceuna.util.Message;
 import cr.ac.una.sigeceuna.util.Response;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -123,9 +124,11 @@ public class CreateAprovementsController extends Controller implements Initializ
         this.observableManagementaprobationDto.clear();
         
         updateManagementsList();
+        FXCollections.sort(observableManagementDto,Comparator.comparing(ManagementDto::getMgtId));
         this.tblV_Managements.setItems(observableManagementDto);
         
-        updateAprobationsList();
+        updateAprobationsList();        
+        FXCollections.sort(observableManagementaprobationDto,Comparator.comparing(ManagementaprobationDto::getMgtaId));
         this.tblV_Aprobations.setItems(observableManagementaprobationDto);
         
         //Table selections
@@ -187,7 +190,7 @@ public class CreateAprovementsController extends Controller implements Initializ
     
     @FXML
     void onActionBtnCreate(ActionEvent event) {
-        if(this.userDtoSelected.getUsrId()==null){
+        if(this.userDtoSelected==null){
             new Message().showModal(Alert.AlertType.ERROR, bundle.getString("noUserSelected"), getStage(),bundle.getString("selectAnUser"));
         }
         else{
@@ -231,6 +234,7 @@ public class CreateAprovementsController extends Controller implements Initializ
                 .equals("A")).toList();
         
         this.observableUsersDto.addAll(usersList);
+        FXCollections.sort(observableUsersDto,Comparator.comparing(UserDto::getUsrId));
         this.tblV_Users.setItems(observableUsersDto);
         }
     }
@@ -315,7 +319,7 @@ public class CreateAprovementsController extends Controller implements Initializ
 
     @FXML
     void onActionBtnFilterUsers(ActionEvent event) {
-        if(this.managementDtoSelected.getMgtId()==null){
+        if(this.managementDtoSelected==null){
             new Message().showModal(Alert.AlertType.ERROR, bundle.getString("noUsers"), getStage(),bundle.getString("loadAManagement"));
         }
         else{

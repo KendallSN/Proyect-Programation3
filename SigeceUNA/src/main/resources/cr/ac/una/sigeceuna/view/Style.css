@@ -34,13 +34,13 @@
     -fx-font-size: 20px;
 }
 #lbl_expired {
-    -fx-background-color: #FFCDD2;  /* Fondo rojo claro */
-    -fx-text-fill: #B71C1C;         /* Texto rojo oscuro */
-    -fx-font-weight: bold;          /* Texto en negrita */
-    -fx-border-color: #B71C1C;      /* Borde rojo oscuro */
-    -fx-border-width: 2px;          /* Grosor del borde */
-    -fx-padding: 5px;               /* Espacio alrededor del texto */
-    -fx-border-radius: 5px;         /* Bordes redondeados */
+    -fx-background-color: #FFCDD2;
+    -fx-text-fill: #B71C1C;
+    -fx-font-weight: bold;
+    -fx-border-color: #B71C1C;
+    -fx-border-width: 2px;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
     -fx-background-radius: 5px;
 }
 .boldlabel{
@@ -97,6 +97,22 @@
     -fx-border-width: 0.5px;
 }
 
+.label-title {
+    -fx-font-size: 24px;             /* Tamaño de fuente del título */
+    -fx-font-weight: bold;           /* Negrita para hacer el título más destacado */
+    -fx-text-fill: #2a2a2a;          /* Color del texto */
+    -fx-padding: 10px 0;             /* Espaciado arriba y abajo */
+    -fx-border-color: transparent;   /* Quita cualquier borde */
+    -fx-background-color: transparent;
+}
+
+.label-subtitle {
+    -fx-font-size: 18px;             /* Tamaño de fuente más pequeño para subtítulos */
+    -fx-font-weight: semi-bold;
+    -fx-text-fill: #4a4a4a;
+    -fx-padding: 8px 0;
+}
+
 /*Buttons*/
 .button {
     -fx-pref-width: 200px;
@@ -110,6 +126,19 @@
     -fx-font-weight: bold;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0, 2, 2);
+    -fx-transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button:hover {
+    -fx-background-color: -fx-base-color-third;
+    -fx-text-fill: white;
+    -fx-transform: scale(1.05);
+}
+
+.button:pressed {
+    -fx-background-color: -fx-base-color-fourth;
+    -fx-transform: scale(0.95);
 }
 .button-Save{
   -fx-background-color:#97dcaa;
@@ -164,5 +193,98 @@
 }
 
 .choicebox {
-     -fx-pref-height: 30px;
-} 
+    -fx-pref-height: 30px;
+    -fx-background-color: -fx-base-color-second;
+    -fx-border-color: -fx-base-color-fourth;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-font-size: 14px;
+}
+
+.choicebox:hover {
+    -fx-background-color: -fx-base-color-third;
+    -fx-text-fill: white;
+}
+
+.table-view {
+    -fx-background-color: #addecf;
+    -fx-table-cell-border-color: transparent;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 5, 0, 0, 0);
+}
+
+.table-row-cell {
+    -fx-alternate-row-fill-visible: true;
+    -fx-background-color: transparent;
+    -fx-border-color: #b2b7bf; /* Color de borde para las celdas */
+    -fx-border-width: 0 0 1px 0;
+}
+
+.table-row-cell:odd {
+    -fx-background-color: #f9f9f9;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #24599c;
+}
+
+.table-row-cell.gray {
+    -fx-background-color: #959aa3;
+}
+
+.table-row-cell.gray:hover {
+    -fx-background-color: #6e737d; /* Color para el hover sobre la fila gris */
+}
+
+.table-row-cell.red {
+    -fx-background-color: #e61e1e;
+}
+
+.table-row-cell.red:hover {
+    -fx-background-color: #911313; /* Color para el hover sobre la fila roja */
+}
+
+.table-row-cell.yellow {
+    -fx-background-color: #e0e314;
+}
+
+.table-row-cell.yellow:hover {
+    -fx-background-color: #946416; /* Color para el hover sobre la fila amarilla */
+}
+
+.list-view {
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #ccc;
+    -fx-padding: 5px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #2a2a2a;
+    -fx-padding: 10px;
+    -fx-font-size: 14px;
+    -fx-font-family: "Arial";
+}
+
+.list-cell:hover, .list-cell:odd:hover {
+    -fx-background-color: #d3e4f7;
+}
+
+.list-cell:selected {
+    -fx-background-color: #24599c;
+}
+
+.list-view:focused .list-cell:selected {
+    -fx-background-color: #1e4880;
+    -fx-text-fill: white;
+}
+
+.list-cell:odd {
+    -fx-background-color: #b5c7c5;
+}
+

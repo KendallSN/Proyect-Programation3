@@ -48,6 +48,7 @@ public class LoginController extends Controller implements Initializable {
     private Button btnCancel;
     @FXML
     private Button btnLogIn;
+    String role;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -107,21 +108,23 @@ public class LoginController extends Controller implements Initializable {
                 if (response.getState()) {
                     UserDto userDto=(UserDto)response.getResult("User");
                     AppContext.getInstance().set("Role", userDto.Role());
-                    if(true){//colocar AppContext.getInstance().get("role")!="Sin asignar"
+                    this.role=(String) AppContext.getInstance().get("Role");
+                    if(role.equals("Admin")||role.equals("Manager")||role.equals("Applicant")){
                         this.txtPassword.clear();
                         this.txtUser.clear();
-                       Locale locale=Locale.forLanguageTag(userDto.getUsrLanguage());
-                    ResourceBundle exampleBundle = ResourceBundle.getBundle("cr.ac.una.sigeceuna.languajes.Messages",locale);                  
-                    FlowController.setIdioma(exampleBundle);
-                AppContext.getInstance().set("User", response.getResult("User"));
+                        Locale locale=Locale.forLanguageTag(userDto.getUsrLanguage());
+                        ResourceBundle exampleBundle = ResourceBundle.getBundle("cr.ac.una.sigeceuna.languajes.Messages",locale);                  
+                        FlowController.setIdioma(exampleBundle);
+                        AppContext.getInstance().set("User", response.getResult("User"));
+                    
                         FlowController.getInstance().goMain();
                         getStage().close();
                     }
                     else{
                         new Message().showModal(Alert.AlertType.WARNING, "Acceso denagado", getStage(),
-                            "Solo usuario con Admin, Manage o Applicant role tienen permitido ingresar al sistema.");
+                            "Solo usuario con Admin, Manager o Applicant role tienen permitido ingresar al sistema.");
                     }
-                } 
+                }
                 else if(responseTemp.getState()&&!response.getState()){
                     this.txtPassword.clear();
                     this.txtUser.clear();

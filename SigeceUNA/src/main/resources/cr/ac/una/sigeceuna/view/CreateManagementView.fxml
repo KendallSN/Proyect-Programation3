@@ -29,7 +29,7 @@
                <children>
                   <VBox prefHeight="695.0" prefWidth="728.0" spacing="20.0">
                      <children>
-                        <Label alignment="CENTER" prefHeight="68.0" prefWidth="380.0" text="%label.createManagements" />
+                        <Label alignment="CENTER" prefHeight="68.0" prefWidth="380.0" styleClass="label-title" text="%label.createManagements" />
                         <HBox prefHeight="53.0" prefWidth="718.0" spacing="20.0">
                            <children>
                               <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnReturn" text="%button.return" />
@@ -94,7 +94,7 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="401.0" spacing="10.0">
                                        <children>
                                           <Label styleClass="label-small" text="%label.assignedUser" />
-                                          <ChoiceBox fx:id="chb_AssignedUser" focusTraversable="false" prefWidth="150.0" />
+                                          <ChoiceBox fx:id="chb_AssignedUser" focusTraversable="false" prefWidth="150.0" styleClass="choicebox" />
                                           <TextField fx:id="txt_FilterAssignedUser" focusTraversable="false" prefHeight="48.0" prefWidth="149.0" promptText="%prompt.name">
                                              <font>
                                                 <Font size="18.0" />
@@ -106,7 +106,7 @@
                                     <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="401.0" spacing="10.0">
                                        <children>
                                           <Label styleClass="label-small" text="%label.usersToApprove" />
-                                          <ChoiceBox fx:id="chb_UserAprove" focusTraversable="false" prefWidth="150.0" />
+                                          <ChoiceBox fx:id="chb_UserAprove" focusTraversable="false" prefWidth="150.0" styleClass="choicebox" />
                                           <TextField fx:id="txt_FilterUserAprove" focusTraversable="false" prefHeight="48.0" prefWidth="149.0" promptText="%prompt.name">
                                              <font>
                                                 <Font size="18.0" />
@@ -159,7 +159,7 @@
                   <Separator orientation="VERTICAL" prefHeight="200.0" />
                   <VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="SOMETIMES">
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-small" text="%label.activities" textAlignment="CENTER" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-subtitle" text="%label.activities" textAlignment="CENTER" />
                         <TableView fx:id="tblV_Activities" focusTraversable="false">
                            <columns>
                               <TableColumn fx:id="tblC_IDActivitie" prefWidth="75.0" text="%tblC.id" />
@@ -169,7 +169,7 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-small" text="%label.subactivities" textAlignment="CENTER" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-subtitle" text="%label.subactivities" textAlignment="CENTER" />
                         <TableView fx:id="tblV_SubActivities" focusTraversable="false">
                            <columns>
                               <TableColumn fx:id="tblC_IDSubActivitie" prefWidth="75.0" text="%tblC.id" />

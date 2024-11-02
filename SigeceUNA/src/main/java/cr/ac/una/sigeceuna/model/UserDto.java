@@ -181,7 +181,7 @@ public class UserDto {
                 }
             }
         }
-        return "Sin asignar";
+        return "Unknown";
     }
 
 

@@ -32,7 +32,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="%label.reports">
+                  <Label alignment="CENTER" contentDisplay="CENTER" styleClass="label-title" text="%label.reports">
                      <font>
                         <Font size="9.0" />
                      </font>
@@ -62,14 +62,14 @@
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="218.0" prefWidth="158.0" spacing="40.0">
                                        <children>
-                                          <Label text="%label.includeManagements" />
+                                          <Label styleClass="label-subtitle" text="%label.includeManagements" />
                                           <CheckBox fx:id="chkAttended" focusTraversable="false" mnemonicParsing="false" text="%chk.attended" />
                                           <CheckBox fx:id="chkRequested" focusTraversable="false" mnemonicParsing="false" text="%chk.requested" />
                                        </children>
                                     </VBox>
                                     <VBox alignment="CENTER" prefHeight="218.0" prefWidth="154.0" spacing="40.0">
                                        <children>
-                                          <Label text="%label.termType" />
+                                          <Label styleClass="label-subtitle" text="%label.termType" />
                                           <RadioButton fx:id="rdbSpecificDate" focusTraversable="false" mnemonicParsing="false" onAction="#specificDateSelected" selected="true" text="%rBtn.specificDate" />
                                           <RadioButton fx:id="rdbRangeDates" focusTraversable="false" mnemonicParsing="false" onAction="#rangeDateSelected" text="%rBtn.dateRange" />
                                        </children>
@@ -78,7 +78,7 @@
                                        <children>
                                           <VBox fx:id="vBoxSpecificDate" alignment="CENTER" prefHeight="218.0" prefWidth="184.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <Label text="%date" />
+                                                <Label styleClass="label-subtitle" text="%date" />
                                                 <VBox alignment="CENTER" prefHeight="0.0" prefWidth="166.0">
                                                    <VBox.margin>
                                                       <Insets />
@@ -135,7 +135,7 @@
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="572.0" prefWidth="483.0">
                                        <children>
-                                          <Label text="%label.managementToInclude" />
+                                          <Label styleClass="label-subtitle" text="%label.managementToInclude" />
                                           <HBox prefHeight="162.0" prefWidth="200.0">
                                              <children>
                                                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -183,7 +183,7 @@
                                  <children>
                                     <VBox alignment="CENTER" prefHeight="532.0" prefWidth="489.0">
                                        <children>
-                                          <Label text="%label.users" />
+                                          <Label styleClass="label-subtitle" text="%label.users" />
                                           <TextField fx:id="txtFilterUser2" prefHeight="45.0" prefWidth="328.0" promptText="%prompt.completeName">
                                              <font>
                                                 <Font size="18.0" />
@@ -195,7 +195,7 @@
                                        <children>
                                           <VBox alignment="CENTER" prefHeight="73.0" prefWidth="298.0">
                                              <children>
-                                                <Label text="%label.includeAprobations" />
+                                                <Label styleClass="label-subtitle" text="%label.includeAprobations" />
                                              </children>
                                           </VBox>
                                           <CheckBox fx:id="chkAprobationsApproveds" mnemonicParsing="false" text="%chk.approved" />

@@ -24,7 +24,7 @@
                      <children>
                         <VBox alignment="TOP_CENTER" HBox.hgrow="SOMETIMES">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="240.0" text="%label.areas" textAlignment="CENTER" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="240.0" styleClass="label-title" text="%label.areas" textAlignment="CENTER" />
                               <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                                  <children>
                                     <TextField fx:id="txt_SearchArea" focusTraversable="false" prefHeight="58.0" prefWidth="284.0" promptText="%prompt.search">
@@ -87,7 +87,7 @@
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
                         <VBox alignment="TOP_CENTER" HBox.hgrow="SOMETIMES">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="240.0" text="%label.activities" textAlignment="CENTER" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="240.0" styleClass="label-title" text="%label.activities" textAlignment="CENTER" />
                               <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                                  <children>
                                     <TextField fx:id="txt_SearchActivitie" focusTraversable="false" prefHeight="58.0" prefWidth="284.0" promptText="%prompt.search">
@@ -149,7 +149,7 @@
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
                         <VBox alignment="TOP_CENTER" HBox.hgrow="SOMETIMES">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="296.0" text="%label.subactivities" textAlignment="CENTER">
+                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="296.0" styleClass="label-title" text="%label.subactivities" textAlignment="CENTER">
                                  <VBox.margin>
                                     <Insets left="10.0" />
                                  </VBox.margin>

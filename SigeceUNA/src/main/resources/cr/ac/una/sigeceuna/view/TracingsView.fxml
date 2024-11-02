@@ -25,7 +25,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="26.0" prefWidth="678.0">
                            <children>
-                              <Label prefHeight="68.0" prefWidth="240.0" text="%label.tracings" />
+                              <Label prefHeight="68.0" prefWidth="240.0" styleClass="label-title" text="%label.tracings" />
                               <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnReturn" text="%button.return" />
                            </children>
                         </HBox>
@@ -68,7 +68,7 @@
                               </HBox>
                               <VBox alignment="TOP_CENTER" prefHeight="82.0" prefWidth="366.0">
                                  <children>
-                                    <Label text="%label.documents" />
+                                    <Label styleClass="label-subtitle" text="%label.documents" />
                                     <ListView fx:id="listV_File" focusTraversable="false" onMouseClicked="#handleFileClicked" prefHeight="132.0" prefWidth="364.0" />
                                  </children>
                               </VBox>
