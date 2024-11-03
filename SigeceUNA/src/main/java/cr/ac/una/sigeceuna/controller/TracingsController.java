@@ -68,7 +68,7 @@ public class TracingsController extends Controller implements Initializable{
     private TableView<TracingDto> tblV_Tracings;
 
     @FXML
-    private TextArea txtA_Details;
+    private TextField txt_detail;
 
     @FXML
     private TextField txt_TypeFilter;
@@ -141,7 +141,7 @@ public class TracingsController extends Controller implements Initializable{
                             setText(bundle.getString("denied"));
                             break;
                         case "solved":
-                            setText(bundle.getString("resolved"));
+                            setText(bundle.getString("solved"));
                             break;
                         default:
                             setText(item);
@@ -202,9 +202,7 @@ public class TracingsController extends Controller implements Initializable{
                     setText(item.format(formatter));
                 }
             }
-        });
-        this.tracingDto=new TracingDto();
-        newTracing();
+        });    
         
         this.listV_File.setCellFactory(param -> new ListCell<FileDto>() {
             private Button deleteButton = new Button("x");
@@ -245,15 +243,17 @@ public class TracingsController extends Controller implements Initializable{
                 }
             }
         });
+        this.tracingDto=new TracingDto();
+        newTracing();
     }
     
     private void clearSpaces(){
         this.tracingDto = new TracingDto();
-        this.txtA_Details.deselect();
+        this.txt_detail.deselect();
         this.txt_TypeFilter.deselect();
         this.fileLoad=false;
         this.observableListFiles.clear();
-        this.txtA_Details.clear();
+        this.txt_detail.clear();
         this.txt_TypeFilter.clear();
         this.chb_SolutionType.getSelectionModel().clearSelection();
     }
@@ -296,9 +296,15 @@ public class TracingsController extends Controller implements Initializable{
         if(!this.txt_TypeFilter.getText().isEmpty() && !this.txt_TypeFilter.getText().isBlank()){           
             this.observableTracingsDto.addAll(this.tracingsList.stream().filter(tcg -> {
                 String solutionType = tcg.getTcgSolutiontype().toLowerCase();
-                return (txtFilter.contains("denegado") && solutionType.equals("denied")) || 
-                       (txtFilter.contains("resuelto") && solutionType.equals("solved")) ||
-                       (txtFilter.contains("denied")) || (txtFilter.contains("resolved"));
+                switch (bundle.getLocale().toString()){
+                    case "es":
+                        return ("denegado".contains(txtFilter) && solutionType.equals("denied")) || 
+                       ("resuelta".contains(txtFilter) && solutionType.equals("solved"));
+                    case "en":
+                        return ("denied".contains(txtFilter) && solutionType.equals("denied")) || 
+                       ("solved".contains(txtFilter) && solutionType.equals("solved"));
+                    default:return false;
+                }
             }).toList());
         }
         else{
@@ -419,13 +425,13 @@ public class TracingsController extends Controller implements Initializable{
     
     @FXML
     void onActionBtnSave(ActionEvent event) {
-        if(inProgressorApproval()){
             String invalid = validateRequiredSpaces();
             if (!invalid.isEmpty()) {
                 new Message().showModal(Alert.AlertType.ERROR, bundle.getString("saveTracing"), getStage(), invalid);
             }
-            else{           
-                try {    
+            else{
+                try {
+                    this.tracingDto.setTcgSolutiondetail(this.txt_detail.getText());
                     this.tracingDto.setMgtId(this.managementDtoSelected.getMgtId());
                     if(this.tracingDto.getTcgId()==null){
                         this.tracingDto.setTcgCreationdate(LocalDateTime.now());
@@ -451,18 +457,6 @@ public class TracingsController extends Controller implements Initializable{
                     }
                    newTracing();
             }
-        }
-        else{new Message().showModal(Alert.AlertType.WARNING, bundle.getString("managemetStateNotValid"), getStage(),bundle.getString("managementState"));
-}
-    }
-    
-    private boolean inProgressorApproval(){
-        if(this.managementDtoSelected.getMgtState().equals("In approval") || this.managementDtoSelected.getMgtState().equals("In progress")){
-            return true;
-        }
-        else{
-            return false;
-        }
     }
 
     private void newTracing() {
@@ -472,17 +466,16 @@ public class TracingsController extends Controller implements Initializable{
     }
 
     private void unbindTracing() {
-        this.txtA_Details.textProperty().unbindBidirectional(this.tracingDto.tcgSolutiondetail);
+        this.txt_detail.textProperty().unbindBidirectional(this.tracingDto.tcgSolutiondetail);
     }
 
     private void bindTracing(boolean b) {
-        this.txtA_Details.textProperty().bindBidirectional(this.tracingDto.tcgSolutiondetail);
+        this.txt_detail.textProperty().bindBidirectional(this.tracingDto.tcgSolutiondetail);
     }
     
     private void updateTracingsList() {
         this.tracingsList=new ArrayList<>();
         this.observableTracingsDto.clear();
-        System.out.println(loggedUser.getUsrId());
         this.tracingsList=((List<TracingDto>) this.tracingService.getTracings().getResult("Tracings"))
                 .stream().filter(tcg->tcg.getMgtId().equals(this.managementDtoSelected.getMgtId())).toList();       
         this.observableTracingsDto.addAll(tracingsList);
@@ -550,7 +543,7 @@ public class TracingsController extends Controller implements Initializable{
     private void loadTracing() {
         this.observableListFiles.clear();
         this.tracingDto=this.tracingSelected;
-        this.txtA_Details.setText(this.tracingDto.getTcgSolutiondetail());
+        this.txt_detail.setText(this.tracingDto.getTcgSolutiondetail());
         if(this.tracingDto.getTcgSolutiontype().equals("denied")){
             this.chb_SolutionType.setValue(bundle.getString("denied"));
         }
@@ -558,6 +551,5 @@ public class TracingsController extends Controller implements Initializable{
         if(!this.tracingDto.getFileCollection().isEmpty() && this.tracingDto.getFileCollection()!=null){
             this.observableListFiles.addAll(this.tracingDto.getFileCollection());
         }
-        bindTracing(false);
     }
 }

@@ -36,6 +36,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -145,6 +146,37 @@ public class SearchManagementController extends Controller implements Initializa
         this.observableOFilters.clear();
         this.observableManagementsDto.clear();        
         
+        tblC_State.setCellValueFactory(new PropertyValueFactory<>("mgtState"));
+        tblC_State.setCellFactory(column -> new TableCell<ManagementDto, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    switch (item.toLowerCase()) {
+                        case "in approval":
+                            setText(bundle.getString("inApproval"));
+                            break;
+                        case "in progress":
+                            setText(bundle.getString("inProgress"));
+                            break;
+                        case "on hold":
+                            setText(bundle.getString("onHold"));
+                            break;
+                        case "rejected":
+                            setText(bundle.getString("rejected"));
+                            break;
+                        case "resolved":
+                            setText(bundle.getString("solved"));
+                            break;
+                        default:
+                            setText(item);
+                            break;
+                    }
+                }
+            }
+        });
         fillManagementDtoList();
         this.observableManagementsDto.addAll(managementsDtoList);
         FXCollections.sort(observableManagementsDto,Comparator.comparing(ManagementDto::getMgtId));
@@ -191,8 +223,7 @@ public class SearchManagementController extends Controller implements Initializa
                 combinedValue.set(newDate.toString());
                 this.txt_Filter.clear();
             }
-        });
-        
+        });       
     }
 
     @Override
@@ -201,7 +232,7 @@ public class SearchManagementController extends Controller implements Initializa
         //TableView inicialization
         tblC_ID.setCellValueFactory(new PropertyValueFactory<>("mgtId"));
         tblC_Subject.setCellValueFactory(new PropertyValueFactory<>("mgtSubject"));
-        tblC_State.setCellValueFactory(new PropertyValueFactory<>("mgtState"));
+        
         
         tblC_YAttribute.setCellValueFactory(new PropertyValueFactory<>("attribute"));
         tblC_YOperator.setCellValueFactory(new PropertyValueFactory<>("operator"));
@@ -398,6 +429,7 @@ public class SearchManagementController extends Controller implements Initializa
         // Save excel window config
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle(bundle.getString("saveFile"));
+        fileChooser.setInitialFileName(bundle.getString("label.managements") + " " + ".xlsx");
         fileChooser.getExtensionFilters().add(new ExtensionFilter("Excel Files", "*.xlsx"));
         File file = fileChooser.showSaveDialog(((Window) this.tblV_Managements.getScene().getWindow()));
 

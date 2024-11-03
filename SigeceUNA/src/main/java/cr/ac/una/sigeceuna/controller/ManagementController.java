@@ -249,6 +249,15 @@ public class ManagementController extends Controller implements Initializable{
         fileOutputStream.close();
     }
     
+    private boolean inProgressorApproval(){
+        if(this.managementSelected.getMgtState().equals("In approval") || this.managementSelected.getMgtState().equals("In progress")){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
     @FXML
     void onActionBtnCreateManagement(ActionEvent event) {
         if(AppContext.getInstance().get("Role").equals("Admin") || AppContext.getInstance().get("Role").equals("Applicant")){
@@ -264,7 +273,12 @@ public class ManagementController extends Controller implements Initializable{
     void onActionBtnTracings(ActionEvent event) {
         if(this.managementSelected!=null){
             if(AppContext.getInstance().get("Role").equals("Admin") || AppContext.getInstance().get("Role").equals("Applicant")){
+                if(inProgressorApproval()){
                 FlowController.getInstance().goView("TracingsView");
+                }
+                else{
+                    new Message().showModal(Alert.AlertType.WARNING, bundle.getString("managemetStateNotValid"), getStage(),bundle.getString("managementState"));
+                }
             }
             else{
                 new Message().showModal(Alert.AlertType.WARNING, bundle.getString("accessDenied"), getStage(),

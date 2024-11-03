@@ -848,6 +848,7 @@ public class CreateManagementController extends Controller implements Initializa
                     Logger.getLogger(AreasController.class.getName()).log(Level.SEVERE, bundle.getString("deleteErrorManagement"), ex);
                     new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteManagement"), getStage(), bundle.getString("deleteErrorManagement"));
                 }
+                newManagement();
             }
         }
     }

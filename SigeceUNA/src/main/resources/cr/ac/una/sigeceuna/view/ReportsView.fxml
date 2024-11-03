@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -60,14 +61,19 @@
                                           </ListView>
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" prefHeight="218.0" prefWidth="158.0" spacing="40.0">
+                                    <VBox alignment="CENTER" spacing="40.0">
                                        <children>
                                           <Label styleClass="label-subtitle" text="%label.includeManagements" />
                                           <CheckBox fx:id="chkAttended" focusTraversable="false" mnemonicParsing="false" text="%chk.attended" />
                                           <CheckBox fx:id="chkRequested" focusTraversable="false" mnemonicParsing="false" text="%chk.requested" />
                                        </children>
                                     </VBox>
-                                    <VBox alignment="CENTER" prefHeight="218.0" prefWidth="154.0" spacing="40.0">
+                                    <Separator orientation="VERTICAL" prefHeight="200.0">
+                                       <HBox.margin>
+                                          <Insets left="2.0" right="2.0" />
+                                       </HBox.margin>
+                                    </Separator>
+                                    <VBox alignment="CENTER" spacing="40.0">
                                        <children>
                                           <Label styleClass="label-subtitle" text="%label.termType" />
                                           <RadioButton fx:id="rdbSpecificDate" focusTraversable="false" mnemonicParsing="false" onAction="#specificDateSelected" selected="true" text="%rBtn.specificDate" />
@@ -76,7 +82,7 @@
                                     </VBox>
                                     <AnchorPane prefHeight="572.0" prefWidth="182.0">
                                        <children>
-                                          <VBox fx:id="vBoxSpecificDate" alignment="CENTER" prefHeight="218.0" prefWidth="184.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <VBox fx:id="vBoxSpecificDate" alignment="CENTER" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
                                                 <Label styleClass="label-subtitle" text="%date" />
                                                 <VBox alignment="CENTER" prefHeight="0.0" prefWidth="166.0">

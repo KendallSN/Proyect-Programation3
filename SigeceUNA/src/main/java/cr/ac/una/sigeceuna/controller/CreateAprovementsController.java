@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -159,6 +160,64 @@ public class CreateAprovementsController extends Controller implements Initializ
                 }
             }
         );
+        
+        tblC_stateAprobation.setCellValueFactory(new PropertyValueFactory<>("mgtaState"));
+        tblC_stateAprobation.setCellFactory(column -> new TableCell<ManagementaprobationDto, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    switch (item.toLowerCase()) {
+                        case "pending":
+                            setText(bundle.getString("pending"));
+                            break;
+                        case "approved":
+                            setText(bundle.getString("approved"));
+                            break;
+                        case "rejected":
+                            setText(bundle.getString("rejected"));
+                            break;
+                        default:
+                            setText(bundle.getString("unknown"));
+                            break;
+                    }
+                }
+            }
+        });
+        
+        tblC_StateManagement.setCellValueFactory(new PropertyValueFactory<>("mgtState"));
+        tblC_StateManagement.setCellFactory(column -> new TableCell<ManagementDto, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    switch (item.toLowerCase()) {
+                        case "in approval":
+                            setText(bundle.getString("inApproval"));
+                            break;
+                        case "in progress":
+                            setText(bundle.getString("inProgress"));
+                            break;
+                        case "on hold":
+                            setText(bundle.getString("onHold"));
+                            break;
+                        case "rejected":
+                            setText(bundle.getString("rejected"));
+                            break;
+                        case "resolved":
+                            setText(bundle.getString("solved"));
+                            break;
+                        default:
+                            setText(item);
+                            break;
+                    }
+                }
+            }
+        });
 
     }
 
@@ -173,12 +232,10 @@ public class CreateAprovementsController extends Controller implements Initializ
         
         //TableView Management inicialization
         tblC_IDManagement.setCellValueFactory(new PropertyValueFactory<>("mgtId"));
-        tblC_StateManagement.setCellValueFactory(new PropertyValueFactory<>("mgtState"));
         tblC_SubjectManagement.setCellValueFactory(new PropertyValueFactory<>("mgtSubject"));
         
         //TableView Managementaprobations inicialization
         tblC_idAprobation.setCellValueFactory(new PropertyValueFactory<>("mgtaId"));
-        tblC_stateAprobation.setCellValueFactory(new PropertyValueFactory<>("mgtaState"));
         tblC_idManagementAprobation.setCellValueFactory(new PropertyValueFactory<>("mgtId"));
         tblC_DescriptionAprobation.setCellValueFactory(new PropertyValueFactory<>("mgtaComment"));
     }
@@ -312,7 +369,7 @@ public class CreateAprovementsController extends Controller implements Initializ
 
             // Actualice the observable list with the filtered list
             this.observableManagementDto = FXCollections.observableArrayList(filteredList);
-
+            FXCollections.sort(observableManagementDto,Comparator.comparing(ManagementDto::getMgtId));
             this.tblV_Managements.setItems(observableManagementDto);
         }
     }
@@ -333,7 +390,7 @@ public class CreateAprovementsController extends Controller implements Initializ
 
                 // Actualice the observable list with the filtered list
                 this.observableUsersDto = FXCollections.observableArrayList(filteredList);
-
+                FXCollections.sort(observableUsersDto,Comparator.comparing(UserDto::getUsrId));
                 this.tblV_Users.setItems(observableUsersDto);
             }
         }

@@ -307,47 +307,48 @@ public class AreasController extends Controller implements Initializable {
     }
     
     private void setupDragAndDropActivity() {
-        tblV_Activities.setRowFactory(tv -> {
-            TableRow<ActivityDto> row = new TableRow<>();
+    tblV_Activities.setRowFactory(tv -> {
+        TableRow<ActivityDto> row = new TableRow<>();
 
-            row.setOnDragDetected(event -> {
-                if (!row.isEmpty()) {
-                    Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
+        row.setOnDragDetected(event -> {
+            if (!row.isEmpty()) {
+                Dragboard db = row.startDragAndDrop(TransferMode.MOVE);
 
-                    ActivityDto activity = row.getItem();
+                ActivityDto activity = row.getItem();
 
-                    ClipboardContent content = new ClipboardContent();
-                    content.putString(activity.getActId().toString()); 
-                    db.setContent(content);
+                ClipboardContent content = new ClipboardContent();
+                content.putString(activity.getActId().toString()); 
+                db.setContent(content);
 
-                    WritableImage snapshot = row.snapshot(null, null);
-                    db.setDragView(snapshot);
+                WritableImage snapshot = row.snapshot(null, null);
+                db.setDragView(snapshot);
 
-                    event.consume();
-                }
-            });
-
-            row.setOnDragOver(event -> {
-                if (event.getGestureSource() != row && event.getDragboard().hasString()) {
-                    event.acceptTransferModes(TransferMode.MOVE);
-                }
                 event.consume();
-            });
+            }
+        });
 
-            row.setOnDragDropped(event -> {
-                Dragboard db = event.getDragboard();
-                boolean success = false;
-                if (db.hasString()) {
-                    Long draggedActId = Long.valueOf(db.getString());
+        row.setOnDragOver(event -> {
+            if (event.getGestureSource() != row && event.getDragboard().hasString()) {
+                event.acceptTransferModes(TransferMode.MOVE);
+            }
+            event.consume();
+        });
 
-                    ActivityDto draggedActivity = observableActivitiesDto.stream()
-                        .filter(act -> act.getActId().equals(draggedActId))
-                        .findFirst().orElse(null);
+        row.setOnDragDropped(event -> {
+            Dragboard db = event.getDragboard();
+            boolean success = false;
+            if (db.hasString()) {
+                Long draggedActId = Long.valueOf(db.getString());
 
-                    if (draggedActivity != null) {
-                        int draggedIdx = observableActivitiesDto.indexOf(draggedActivity);
-                        int targetIdx = row.getIndex();
+                ActivityDto draggedActivity = observableActivitiesDto.stream()
+                    .filter(act -> act.getActId().equals(draggedActId))
+                    .findFirst().orElse(null);
 
+                if (draggedActivity != null) {
+                    int draggedIdx = observableActivitiesDto.indexOf(draggedActivity);
+                    int targetIdx = row.getIndex();
+
+                    if (draggedIdx != -1 && targetIdx != -1 && draggedIdx < observableActivitiesDto.size() && targetIdx <= observableActivitiesDto.size()) {
                         if (draggedIdx != targetIdx) {
                             observableActivitiesDto.remove(draggedIdx);
                             if (targetIdx > draggedIdx) {
@@ -360,19 +361,19 @@ public class AreasController extends Controller implements Initializable {
                                 activity.setActIndexpertype(Long.valueOf(i + 1));
                                 this.activityService.saveActivity(activity);
                             }
-                        
                         }
 
                         success = true;
                     }
                 }
-                event.setDropCompleted(success);
-                event.consume();
-            });
-
-            return row;
+            }
+            event.setDropCompleted(success);
+            event.consume();
         });
-    }
+
+        return row;
+    });
+}
     
     private void setupDragAndDropSubactivity() {
         tblV_SubActivities.setRowFactory(tv -> {
@@ -415,23 +416,24 @@ public class AreasController extends Controller implements Initializable {
                     if (draggedSubactivity != null) {
                         int draggedIdx = observableSubactivitiesDto.indexOf(draggedSubactivity);
                         int targetIdx = row.getIndex();
+                        if (draggedIdx != -1 && targetIdx != -1 && draggedIdx < observableSubactivitiesDto.size() && targetIdx <= observableSubactivitiesDto.size()) {
+                            if (draggedIdx != targetIdx) {
+                                observableSubactivitiesDto.remove(draggedIdx);
+                                if (targetIdx > draggedIdx) {
+                                    targetIdx--;
+                                }
+                                observableSubactivitiesDto.add(targetIdx, draggedSubactivity);
 
-                        if (draggedIdx != targetIdx) {
-                            observableSubactivitiesDto.remove(draggedIdx);
-                            if (targetIdx > draggedIdx) {
-                                targetIdx--;
+                                for (int i = 0; i < observableSubactivitiesDto.size(); i++) {
+                                    SubactivityDto subactivity = observableSubactivitiesDto.get(i);
+                                    subactivity.setSactIndexpertype(Long.valueOf(i + 1));
+                                    this.subactivityService.saveSubactivity(subactivity);
+                                }
+
                             }
-                            observableSubactivitiesDto.add(targetIdx, draggedSubactivity);
-                        
-                            for (int i = 0; i < observableSubactivitiesDto.size(); i++) {
-                                SubactivityDto subactivity = observableSubactivitiesDto.get(i);
-                                subactivity.setSactIndexpertype(Long.valueOf(i + 1));
-                                this.subactivityService.saveSubactivity(subactivity);
-                            }
-                        
+
+                            success = true;
                         }
-
-                        success = true;
                     }
                 }
                 event.setDropCompleted(success);
@@ -480,6 +482,10 @@ public class AreasController extends Controller implements Initializable {
     void onActionBtnDeleteArea(ActionEvent event) {
         if(this.areaDtoSelected.getAreId()==null){
            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("noAreaSelected"), getStage(),bundle.getString("selectAnArea"));
+           return;
+        }
+        if(!areaDeleteable()){
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteArea"), getStage(),bundle.getString("secundaryRegistersArea"));
            return;
         }
         boolean userConfirmed = new Message().showConfirmation(bundle.getString("deleteArea"), getStage(), bundle.getString("sureToDeleteArea"));
@@ -576,7 +582,7 @@ public class AreasController extends Controller implements Initializable {
                 new Message().showModal(Alert.AlertType.ERROR, bundle.getString("saveArea"), getStage(), invalid);
             }
             else{
-                try {    
+                try {
                     Response response = this.areaService.saveArea(areaDto);
                     if (!response.getState()) {
                         new Message().showModal(Alert.AlertType.ERROR, bundle.getString("saveArea"), getStage(), response.getMessage());
@@ -861,6 +867,7 @@ public class AreasController extends Controller implements Initializable {
     void onActionBtnNewAre(ActionEvent event) {
         if (new Message().showConfirmation(bundle.getString("cleanArea"), getStage(), bundle.getString("sureToCleanSpaces"))) {
             newArea();
+            this.tblV_Areas.getSelectionModel().clearSelection();
         }
     }
 
@@ -868,6 +875,7 @@ public class AreasController extends Controller implements Initializable {
     void onActionBtnNewSub(ActionEvent event) {
         if (new Message().showConfirmation(bundle.getString("cleanSubactivity"), getStage(), bundle.getString("sureToCleanSpaces"))) {
             newSubactivity();
+            this.tblV_SubActivities.getSelectionModel().clearSelection();
         }
     }
 
@@ -875,6 +883,7 @@ public class AreasController extends Controller implements Initializable {
     void onActionBtnNewAct(ActionEvent event) {
         if (new Message().showConfirmation(bundle.getString("cleanActivity"), getStage(), bundle.getString("sureToCleanSpaces"))) {
             newActivity();
+            this.tblV_Activities.getSelectionModel().clearSelection();
         }
     }
     
@@ -888,5 +897,15 @@ public class AreasController extends Controller implements Initializable {
     private boolean subactivyDeleteable(){
         List <ManagementDto>managementsList = (List<ManagementDto>) this.managementService.getManagements().getResult("Managements");
         return !(managementsList.stream().filter(m->m.getSactId()!=null).anyMatch(m->m.getSactId().equals(this.subactivityDtoSelected.getSactId())));
+    }
+
+    private boolean areaDeleteable() {
+        List <ManagementDto>managementsList = (List<ManagementDto>) this.managementService.getManagements().getResult("Managements");
+        List<ActivityDto> activitiesList = (List<ActivityDto>) this.activityService.getActivitiesByArea(this.areaDtoSelected.getAreId()).getResult("Activities");
+        List<SubactivityDto> subactivitiesList = (List<SubactivityDto>) this.subactivityService.getSubactivities().getResult("Subactivities");
+        List<SubactivityDto> subactivities = subactivitiesList.stream().filter(m->(activitiesList.stream().anyMatch(a->m.getActId().equals(a.getActId())))).toList();
+        boolean deleteableSubactivities = !(managementsList.stream().filter(m->m.getSactId()!=null).anyMatch(m->subactivities.stream().anyMatch(s->s.getSactId().equals(m.getSactId()))));
+        boolean deleteableActivities = !(managementsList.stream().filter(m->m.getActId()!=null).anyMatch(m->activitiesList.stream().anyMatch(s->s.getActId().equals(m.getActId()))));
+        return deleteableActivities && deleteableSubactivities;
     }
 }

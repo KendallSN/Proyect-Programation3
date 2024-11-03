@@ -34,6 +34,7 @@ public class TracingDto implements Serializable {
     public TracingDto(Long tcgId, LocalDateTime tcgCreationdate, String tcgType, String tcgSolutiontype) {
         this.tcgId = tcgId;
         this.tcgCreationdate = tcgCreationdate;
+        this.tcgSolutiondetail = new SimpleStringProperty();
         this.tcgType = tcgType;
         this.tcgSolutiontype = tcgSolutiontype;
     }

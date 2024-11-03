@@ -107,8 +107,8 @@
 }
 
 .label-subtitle {
-    -fx-font-size: 18px;             /* Tamaño de fuente más pequeño para subtítulos */
-    -fx-font-weight: semi-bold;
+    -fx-font-size: 16px;             /* Tamaño de fuente más pequeño para subtítulos */
+    -fx-font-weight: bold;
     -fx-text-fill: #4a4a4a;
     -fx-padding: 8px 0;
 }
@@ -133,12 +133,10 @@
 .button:hover {
     -fx-background-color: -fx-base-color-third;
     -fx-text-fill: white;
-    -fx-transform: scale(1.05);
 }
 
 .button:pressed {
     -fx-background-color: -fx-base-color-fourth;
-    -fx-transform: scale(0.95);
 }
 .button-Save{
   -fx-background-color:#97dcaa;
@@ -227,12 +225,21 @@
     -fx-background-color: #f9f9f9;
 }
 
+.table-row-cell:selected {
+    -fx-background-color: #7861c9;
+}
+
 .table-row-cell:hover {
     -fx-background-color: #24599c;
 }
 
 .table-row-cell.gray {
     -fx-background-color: #959aa3;
+}
+
+.table-row-cell.gray:selected {
+    -fx-background-color: #3a4252;
+    -fx-text-fill: white;
 }
 
 .table-row-cell.gray:hover {
@@ -243,6 +250,11 @@
     -fx-background-color: #e61e1e;
 }
 
+.table-row-cell.red:selected {
+    -fx-background-color: #4a1010;
+    -fx-text-fill: white;
+}
+
 .table-row-cell.red:hover {
     -fx-background-color: #911313; /* Color para el hover sobre la fila roja */
 }
@@ -251,8 +263,13 @@
     -fx-background-color: #e0e314;
 }
 
+.table-row-cell.red:selected {
+    -fx-background-color: #30230e;
+    -fx-text-fill: white;
+}
+
 .table-row-cell.yellow:hover {
-    -fx-background-color: #946416; /* Color para el hover sobre la fila amarilla */
+    -fx-background-color: #946416;
 }
 
 .list-view {

@@ -8,7 +8,6 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
@@ -53,11 +52,11 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <TextArea fx:id="txtA_Details" focusTraversable="false" prefHeight="76.0" prefWidth="668.0" promptText="%prompt.description">
+                        <TextField fx:id="txt_detail" focusTraversable="false" prefHeight="87.0" prefWidth="787.0" promptText="%prompt.description">
                            <font>
                               <Font size="18.0" />
                            </font>
-                        </TextArea>
+                        </TextField>
                         <HBox prefHeight="150.0" spacing="5.0">
                            <children>
                               <HBox alignment="CENTER" prefHeight="82.0" prefWidth="296.0" spacing="10.0">

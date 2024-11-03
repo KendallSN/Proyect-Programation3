@@ -80,8 +80,33 @@ public class AprovementsController extends Controller implements Initializable{
         //Initialize TableView
         tblC_ID.setCellValueFactory(new PropertyValueFactory<>("mgtaId"));
         tblC_ManagementID.setCellValueFactory(new PropertyValueFactory<>("mgtId"));
-        tblC_State.setCellValueFactory(new PropertyValueFactory<>("mgtaState"));
         tblC_Description.setCellValueFactory(new PropertyValueFactory<>("mgtaComment"));
+        
+        tblC_State.setCellValueFactory(new PropertyValueFactory<>("mgtaState"));
+        tblC_State.setCellFactory(column -> new TableCell<ManagementaprobationDto, String>() {
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    switch (item.toLowerCase()) {
+                        case "pending":
+                            setText(bundle.getString("pending"));
+                            break;
+                        case "approved":
+                            setText(bundle.getString("approved"));
+                            break;
+                        case "rejected":
+                            setText(bundle.getString("rejected"));
+                            break;
+                        default:
+                            setText(bundle.getString("unknown"));
+                            break;
+                    }
+                }
+            }
+        });
         
         tblV_Aprovements.setItems(this.observableManagementaprobationsDto);
         
@@ -162,6 +187,7 @@ public class AprovementsController extends Controller implements Initializable{
         };
 
         tblC_Vote.setCellFactory(cellFactory);
+        
     }
 
     @Override
