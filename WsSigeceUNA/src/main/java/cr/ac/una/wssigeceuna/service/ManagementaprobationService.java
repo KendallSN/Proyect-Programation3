@@ -112,9 +112,6 @@ public class ManagementaprobationService {
                 if (managementaprobation == null) {
                     return new LocalResponse(false, ResponseCode.NOTFOUND_ERROR, "The managementaprobation to delete was not found.", "deleteManagement NoResultException");
                 }
-                if(((List<ManagementaprobationDto>)(getManagementaprobationsByManagement(managementaprobation.getMgtId().getMgtId()).getResult("Managementaprobations"))).size()==1){
-                    return new LocalResponse(false, ResponseCode.INTERNAL_ERROR, "Can delete all the Managementaprobations of a management.", "deleteManagementaprobation ");
-                }
                 em.remove(managementaprobation);
             } else {
                 return new LocalResponse(false, ResponseCode.NOTFOUND_ERROR, "You have to load the Managementaprobation to delete.", "deleteManagementaprobation NoResultException");

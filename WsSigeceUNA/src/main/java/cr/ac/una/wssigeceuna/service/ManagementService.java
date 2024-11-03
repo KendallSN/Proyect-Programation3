@@ -160,6 +160,7 @@ public class ManagementService {
                 if (management == null) {
                     return new LocalResponse(false, ResponseCode.NOTFOUND_ERROR, "The management to delete was not found.", "deleteManagement NoResultException");
                 }
+                ((List<ManagementaprobationDto>) managementaprobationService.getManagementaprobationsByManagement(id).getResult("Managementaprobations")).stream().forEach(ma->managementaprobationService.deleteManagementAprobation(ma.getMgtaId()));
                 em.remove(management);
             } else {
                 return new LocalResponse(false, ResponseCode.NOTFOUND_ERROR, "You have to load the management to delete.", "deleteManagement NoResultException");

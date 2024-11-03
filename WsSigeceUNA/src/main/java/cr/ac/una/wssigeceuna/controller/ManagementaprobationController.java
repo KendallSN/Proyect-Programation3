@@ -84,7 +84,12 @@ public class ManagementaprobationController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteManagementaprobation(@PathParam("id") Long id) {
         try {
+            ManagementaprobationDto managementaprobation = (ManagementaprobationDto) managementaprobationService.getManagementaprobation(id).getResult("Managementaprobation");
+            if(((List<ManagementaprobationDto>)(managementaprobationService.getManagementaprobationsByManagement(managementaprobation.getMgtId()).getResult("Managementaprobations"))).size()==1){
+                return Response.status(ResponseCode.INTERNAL_ERROR.getValue()).entity("Last managementaprobation of a management cant be deleted").build();
+            }
             LocalResponse res = managementaprobationService.deleteManagementAprobation(id);
+            
             if (!res.getState()) {
                 return Response.status(res.getResponseCode().getValue()).entity(res.getMessage()).build();
             }
