@@ -838,8 +838,7 @@ public class CreateManagementController extends Controller implements Initializa
                     Response response = this.managementService.deleteManagement(this.managementDto.getMgtId());
                     if (!response.getState()) {
                         new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteManagement"), getStage(), response.getMessage());
-                    } else {
-                        deleteAprobations();
+                    } else {    
                         clearSpaces();
                         unbindManagement();
                         bindManagement(false);
@@ -850,23 +849,6 @@ public class CreateManagementController extends Controller implements Initializa
                     new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteManagement"), getStage(), bundle.getString("deleteErrorManagement"));
                 }
             }
-        }
-    }
-    
-    private void deleteAprobations(){
-        try {
-            List<ManagementaprobationDto>aprobations = (List<ManagementaprobationDto>) this.managementaprobationService.getManagementaprobationsByManagement(this.managementDto.getMgtId()).getResult("Managementaprobations");
-            for(ManagementaprobationDto mgta:aprobations){
-                Response response = this.managementaprobationService.deleteManagementaprobation(mgta.getMgtaId());
-                if (!response.getState()) {
-                    new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteAprobation"), getStage(), response.getMessage());
-                } else {
-                    new Message().showModal(Alert.AlertType.INFORMATION, bundle.getString("deleteAprobation"), getStage(), bundle.getString("deleteSuccessAprobation"));
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(AreasController.class.getName()).log(Level.SEVERE, bundle.getString("deleteErrorAprobation"), ex);
-            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteAprobation"), getStage(), bundle.getString("deleteErrorAprobation"));
         }
     }
 }
