@@ -190,11 +190,11 @@ public class CreateAprovementsController extends Controller implements Initializ
     
     @FXML
     void onActionBtnCreate(ActionEvent event) {
-        if(this.userDtoSelected==null){
+        if(this.userDtoSelected.getUsrId()==null){
             new Message().showModal(Alert.AlertType.ERROR, bundle.getString("noUserSelected"), getStage(),bundle.getString("selectAnUser"));
         }
         else{
-            try {    
+            try {
                 this.managementaprobationDto.setMgtId(this.managementDtoSelected.getMgtId());
                 this.managementaprobationDto.setUsrToaproveId(this.userDtoSelected);
                 Response response = this.managementaprobationService.saveManagementaprobations(this.managementaprobationDto);

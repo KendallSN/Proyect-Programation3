@@ -2,9 +2,11 @@ package cr.ac.una.sigeceuna.controller;
 
 import cr.ac.una.sigeceuna.model.ActivityDto;
 import cr.ac.una.sigeceuna.model.AreaDto;
+import cr.ac.una.sigeceuna.model.ManagementDto;
 import cr.ac.una.sigeceuna.model.SubactivityDto;
 import cr.ac.una.sigeceuna.service.ActivityService;
 import cr.ac.una.sigeceuna.service.AreaService;
+import cr.ac.una.sigeceuna.service.ManagementService;
 import cr.ac.una.sigeceuna.service.SubactivityService;
 import cr.ac.una.sigeceuna.util.FlowController;
 import cr.ac.una.sigeceuna.util.Message;
@@ -129,6 +131,7 @@ public class AreasController extends Controller implements Initializable {
     private AreaService areaService=new AreaService();
     private ActivityService activityService=new ActivityService();
     private SubactivityService subactivityService=new SubactivityService();
+    private ManagementService managementService=new ManagementService();
     
     //Lists to take information from the database
     private List<AreaDto>areasList;
@@ -445,26 +448,32 @@ public class AreasController extends Controller implements Initializable {
            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("noActivitySelected"), getStage(),bundle.getString("selectAnActivity"));
            return;
         }
-        boolean userConfirmed = new Message().showConfirmation(bundle.getString("deleteActivity"), getStage(), bundle.getString("sureToDeleteActivity"));
-        if(userConfirmed){
-            try {
-                    Response response = this.activityService.deleteActivity(this.activityDtoSelected.getActId());
-                    if (!response.getState()) {
-                        new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteActivity"), getStage(), response.getMessage());
-                    } else {
-                        this.tblV_Activities.getSelectionModel().clearSelection();
-                        this.activityDtoSelected=new ActivityDto();
-                        this.subactivityDtoSelected=new SubactivityDto();                      
-                        this.observableSubactivitiesDto=FXCollections.observableArrayList();
-                        this.tblV_SubActivities.setItems(observableSubactivitiesDto);
-                        updateActivitiesList();
-                        new Message().showModal(Alert.AlertType.INFORMATION, bundle.getString("deleteActivity"), getStage(), bundle.getString("deleteSuccessActivity"));
-                    }         
-            } catch (Exception ex) {
-                Logger.getLogger(AreasController.class.getName()).log(Level.SEVERE, bundle.getString("deleteErrorActivity"), ex);
-                new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteActivity"), getStage(), bundle.getString("deleteErrorActivity"));
-            }
-        } 
+        if(!activityDeleteable()){
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteActivity"), getStage(),bundle.getString("secundaryRegistersActivity"));
+           return;
+        }
+        else{
+            boolean userConfirmed = new Message().showConfirmation(bundle.getString("deleteActivity"), getStage(), bundle.getString("sureToDeleteActivity"));
+            if(userConfirmed){
+                try {
+                        Response response = this.activityService.deleteActivity(this.activityDtoSelected.getActId());
+                        if (!response.getState()) {
+                            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteActivity"), getStage(), response.getMessage());
+                        } else {
+                            this.tblV_Activities.getSelectionModel().clearSelection();
+                            this.activityDtoSelected=new ActivityDto();
+                            this.subactivityDtoSelected=new SubactivityDto();                      
+                            this.observableSubactivitiesDto=FXCollections.observableArrayList();
+                            this.tblV_SubActivities.setItems(observableSubactivitiesDto);
+                            updateActivitiesList();
+                            new Message().showModal(Alert.AlertType.INFORMATION, bundle.getString("deleteActivity"), getStage(), bundle.getString("deleteSuccessActivity"));
+                        }         
+                } catch (Exception ex) {
+                    Logger.getLogger(AreasController.class.getName()).log(Level.SEVERE, bundle.getString("deleteErrorActivity"), ex);
+                    new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteActivity"), getStage(), bundle.getString("deleteErrorActivity"));
+                }
+            } 
+        }
     }
 
     @FXML
@@ -502,6 +511,10 @@ public class AreasController extends Controller implements Initializable {
     void onActionBtnDeleteSubActivitie(ActionEvent event) {
         if(this.subactivityDtoSelected.getSactId()==null){
            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("noSubactivitySelected"), getStage(),bundle.getString("selectASubactivity"));
+           return;
+        }
+        if(!subactivyDeleteable()){
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("deleteSubactivity"), getStage(),bundle.getString("secundaryRegistersSubactivity"));
            return;
         }
         boolean userConfirmed = new Message().showConfirmation(bundle.getString("deleteSubactivity"), getStage(), bundle.getString("sureToDeleteSubactivity"));
@@ -863,5 +876,17 @@ public class AreasController extends Controller implements Initializable {
         if (new Message().showConfirmation(bundle.getString("cleanActivity"), getStage(), bundle.getString("sureToCleanSpaces"))) {
             newActivity();
         }
+    }
+    
+    private boolean activityDeleteable(){
+        List <ManagementDto>managementsList = (List<ManagementDto>) this.managementService.getManagements().getResult("Managements");
+        List<SubactivityDto> subactivitiesList = (List<SubactivityDto>) this.subactivityService.getSubactivitiesByActivity(this.activityDtoSelected.getActId()).getResult("Subactivities");
+        boolean deleteableSubactivities = !(managementsList.stream().filter(m->m.getSactId()!=null).anyMatch(m->subactivitiesList.stream().anyMatch(s->s.getSactId().equals(m.getSactId()))));
+        return !(managementsList.stream().filter(m->m.getActId()!=null).anyMatch(m->m.getActId().equals(this.activityDtoSelected.getActId()))) && deleteableSubactivities;
+    }
+    
+    private boolean subactivyDeleteable(){
+        List <ManagementDto>managementsList = (List<ManagementDto>) this.managementService.getManagements().getResult("Managements");
+        return !(managementsList.stream().filter(m->m.getSactId()!=null).anyMatch(m->m.getSactId().equals(this.subactivityDtoSelected.getSactId())));
     }
 }
