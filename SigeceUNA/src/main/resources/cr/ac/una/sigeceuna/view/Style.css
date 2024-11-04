@@ -4,9 +4,9 @@
     -fx-base-color-third: #1e202f;       /* Gris muy oscuro */
     -fx-base-color-fourth: #79787e;      /* Gris medio */
     -fx-base-color-fifth: #e5e5e5;       /* Gris claro */
-    -fx-color-background: #ce3232;       /* Rosa claro */
-    -fx-base-color-green: #75c48a;       /* Verde claro */
+    -fx-color-background: #b72c2c;       /* Rosa claro */
     -fx-base-color-darkGreen: #0a6623;   /* Verde oscuro */
+    -fx-base-color-green:#6c9669;
 }
 
 /****************************************************************
@@ -36,6 +36,9 @@
 #imgRole{ -fx-image: url("../resources/role.png");}
 #imgCancelTem{-fx-image: url("../resources/cancelTem.png");}
 #imgConfirm{-fx-image: url("../resources/confirm.png");}
+#imgNew{-fx-image: url("../resources/new.png");}
+#imgSearch{ -fx-image: url("../resources/search.png");}
+#imgTake{-fx-image: url("../resources/take.png");}
 
 /****************************************************************
     LABELS
@@ -52,9 +55,9 @@
 
 #lbl_expired {
     -fx-background-color: #FFCDD2;
-    -fx-text-fill: #B71C1C;
+    -fx-text-fill:  -fx-color-background;
     -fx-font-weight: bold;
-    -fx-border-color: #B71C1C;
+    -fx-border-color:  -fx-color-background;
     -fx-border-width: 2px;
     -fx-padding: 5px;
     -fx-border-radius: 5px;
@@ -169,16 +172,16 @@
     -fx-background-color: -fx-base-color-fourth;
 }
 .button-Save{
-    -fx-background-color:#97dcaa;
+    -fx-background-color:-fx-base-color-green;
 }
 .button-Delete{
-    -fx-background-color:#b72c2c;
+    -fx-background-color: -fx-color-background;
 }
 #btnCancel,#btnCancelTem{
-    -fx-background-color:#b72c2c;
+    -fx-background-color: -fx-color-background;
 }
 #btnLogIn, #btnConfirmTem{
-    -fx-background-color:#6c9669;
+    -fx-background-color:-fx-base-color-green;
 }
 #btnCancel:hover, #btnConfirmTem:hover, #btnLogIn:hover, #btnCancelTem:hover, #btnConfirm:hover{
     -fx-background-color: -fx-base-color-third;
@@ -186,7 +189,7 @@
 }
 
 #btnConfirm{
-    -fx-background-color:#6c9669;
+    -fx-background-color:-fx-base-color-green;
 }
 
 #btnForgotPassword {
@@ -211,7 +214,7 @@
     -fx-font-weight: normal;
 }
 #btnSignInUser{
-    -fx-background-color:#6c9669;
+    -fx-background-color:-fx-base-color-green;
 }
 #btnTakePhoto{
     -fx-pref-width: 40px;
@@ -247,7 +250,7 @@
     TABLES
 *****************************************************************/
 .table-view {
-    -fx-background-color: #addecf;
+    -fx-background-color:  #e6eeef;
     -fx-table-cell-border-color: transparent;
     -fx-padding: 10px;
     -fx-border-radius: 5px;
@@ -258,7 +261,7 @@
 .table-row-cell {
     -fx-alternate-row-fill-visible: true;
     -fx-background-color: transparent;
-    -fx-border-color: #b2b7bf; /* Color de borde para las celdas */
+    -fx-border-color:  -fx-base-color-first; /* Color de borde para las celdas */
     -fx-border-width: 0 0 1px 0;
 }
 
@@ -271,7 +274,7 @@
 }
 
 .table-row-cell:hover {
-    -fx-background-color: #24599c;
+    -fx-background-color: -fx-base-color-first;
 }
 
 .table-row-cell.gray {
@@ -288,7 +291,7 @@
 }
 
 .table-row-cell.red {
-    -fx-background-color: #e61e1e;
+    -fx-background-color: -fx-color-background;
 }
 
 .table-row-cell.red:selected {

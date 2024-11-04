@@ -16,6 +16,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -30,9 +31,13 @@ public class ChangePasswordController extends Controller implements Initializabl
     @FXML
     private PasswordField txtConfirmPassword;
     @FXML
-    private Button btnCancel;
+    private Button btnCancelTem;
     @FXML
-    private Button btnConfirm;
+    private ImageView imgCancelTem;
+    @FXML
+    private Button btnConfirmTem;
+    @FXML
+    private ImageView imgConfirm;
 
     /**
      * Initializes the controller class.

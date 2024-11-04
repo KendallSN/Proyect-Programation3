@@ -33,6 +33,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.util.Callback;
 
@@ -65,6 +66,9 @@ public class AprovementsController extends Controller implements Initializable{
     private List<ManagementaprobationDto> managementaprobationsList=new ArrayList<>();
     private UserDto loggedUser;
     private ResourceBundle bundle;
+    @FXML
+    private ImageView imgNew;
+    
     @Override
     public void initialize() {
         this.bundle=FlowController.getIdioma();

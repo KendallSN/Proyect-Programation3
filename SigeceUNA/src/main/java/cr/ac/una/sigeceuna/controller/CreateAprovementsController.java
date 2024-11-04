@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -108,6 +109,14 @@ public class CreateAprovementsController extends Controller implements Initializ
     
     ManagementaprobationDto managementaprobationDto;
     private ResourceBundle bundle;
+    @FXML
+    private Button btn_filterManagements;
+    @FXML
+    private Button btn_filterUsers;
+    @FXML
+    private Button btn_FilterAprobations;
+    @FXML
+    private Button btn_DeleteAprobation;
 
     @Override
     public void initialize() {

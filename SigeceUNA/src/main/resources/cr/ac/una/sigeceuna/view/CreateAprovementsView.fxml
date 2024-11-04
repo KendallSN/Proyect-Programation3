@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1020.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.CreateAprovementsController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1020.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.CreateAprovementsController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -130,7 +130,7 @@
             </VBox>
          </children>
          <styleClass>
-            <String fx:value="smoothbackground2" />
+            <String fx:value="smoothbackground" />
             <String fx:value="shadoweffect" />
          </styleClass>
       </AnchorPane>

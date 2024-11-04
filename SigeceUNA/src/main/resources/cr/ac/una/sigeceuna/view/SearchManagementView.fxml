@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -13,13 +14,14 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="720.0" prefWidth="806.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.SearchManagementController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="720.0" prefWidth="806.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.SearchManagementController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <VBox alignment="TOP_CENTER" spacing="20.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
                <children>
                   <Label alignment="CENTER" prefHeight="68.0" prefWidth="402.0" styleClass="label-title" text="%label.searchManagement" />
+                  <Separator prefWidth="200.0" />
                   <HBox alignment="CENTER" spacing="20.0">
                      <children>
                         <VBox>
@@ -113,7 +115,7 @@
             </VBox>
          </children>
          <styleClass>
-            <String fx:value="smoothbackground2" />
+            <String fx:value="smoothbackground" />
             <String fx:value="shadoweffect" />
          </styleClass>
       </AnchorPane>

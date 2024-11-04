@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -14,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="807.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.TracingsController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="807.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.TracingsController">
    <children>
       <AnchorPane prefHeight="720.0" prefWidth="688.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -28,6 +29,7 @@
                               <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnReturn" text="%button.return" />
                            </children>
                         </HBox>
+                        <Separator prefWidth="200.0" />
                         <HBox prefHeight="58.0" prefWidth="648.0" spacing="15.0">
                            <children>
                               <TextField fx:id="txt_TypeFilter" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="200.0" promptText="%prompt.solutionType">
@@ -90,7 +92,7 @@
             </HBox>
          </children>
          <styleClass>
-            <String fx:value="smoothbackground2" />
+            <String fx:value="smoothbackground" />
             <String fx:value="shadoweffect" />
          </styleClass>
       </AnchorPane>

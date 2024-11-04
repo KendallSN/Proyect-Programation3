@@ -9,30 +9,34 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.AreasController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.AreasController">
    <children>
       <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <HBox VBox.vgrow="SOMETIMES">
+                  <HBox prefHeight="711.0" prefWidth="1233.0" VBox.vgrow="SOMETIMES">
                      <children>
                         <VBox alignment="TOP_CENTER" HBox.hgrow="SOMETIMES">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="240.0" styleClass="label-title" text="%label.areas" textAlignment="CENTER" />
                               <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                                  <children>
-                                    <TextField fx:id="txt_SearchArea" focusTraversable="false" prefHeight="58.0" prefWidth="284.0" promptText="%prompt.search">
+                                    <TextField fx:id="txt_SearchArea" focusTraversable="false" prefHeight="50.0" prefWidth="284.0" promptText="%prompt.search">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </TextField>
-                                    <Button fx:id="btn_SearchArea" focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnSearchArea" text="%button.search" />
+                                    <Button fx:id="btn_SearchArea" focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnSearchArea" text="%button.search">
+                                       <graphic>
+                                          <ImageView fx:id="imgSearch" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </graphic></Button>
                                  </children>
                               </HBox>
                               <TableView fx:id="tblV_Areas" focusTraversable="false">
@@ -62,7 +66,10 @@
                                           <Font size="18.0" />
                                        </font>
                                     </CheckBox>
-                                    <Button mnemonicParsing="false" onAction="#onActionBtnNewAre" text="%button.new" />
+                                    <Button mnemonicParsing="false" onAction="#onActionBtnNewAre" text="%button.new">
+                                       <graphic>
+                                          <ImageView fx:id="imgNew" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </graphic></Button>
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -90,12 +97,15 @@
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="240.0" styleClass="label-title" text="%label.activities" textAlignment="CENTER" />
                               <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                                  <children>
-                                    <TextField fx:id="txt_SearchActivitie" focusTraversable="false" prefHeight="58.0" prefWidth="284.0" promptText="%prompt.search">
+                                    <TextField fx:id="txt_SearchActivitie" focusTraversable="false" prefHeight="50.0" prefWidth="284.0" promptText="%prompt.search">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </TextField>
-                                    <Button fx:id="btn_SearchActivitie" focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnSearchActivitie" text="%button.search" />
+                                    <Button fx:id="btn_SearchActivitie" focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnSearchActivitie" text="%button.search">
+                                       <graphic>
+                                          <ImageView fx:id="imgSearch" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </graphic></Button>
                                  </children>
                               </HBox>
                               <TableView fx:id="tblV_Activities" focusTraversable="false">
@@ -124,6 +134,9 @@
                                        <HBox.margin>
                                           <Insets top="10.0" />
                                        </HBox.margin>
+                                       <graphic>
+                                          <ImageView fx:id="imgNew" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </graphic>
                                     </Button>
                                  </children>
                               </HBox>
@@ -147,7 +160,7 @@
                            </opaqueInsets>
                         </VBox>
                         <Separator orientation="VERTICAL" prefHeight="200.0" />
-                        <VBox alignment="TOP_CENTER" HBox.hgrow="SOMETIMES">
+                        <VBox alignment="TOP_CENTER" prefHeight="711.0" prefWidth="260.0" HBox.hgrow="SOMETIMES">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="68.0" prefWidth="296.0" styleClass="label-title" text="%label.subactivities" textAlignment="CENTER">
                                  <VBox.margin>
@@ -156,12 +169,15 @@
                               </Label>
                               <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="SOMETIMES">
                                  <children>
-                                    <TextField fx:id="txt_SearchSubActivitie" focusTraversable="false" prefHeight="58.0" prefWidth="284.0" promptText="%prompt.search">
+                                    <TextField fx:id="txt_SearchSubActivitie" focusTraversable="false" prefHeight="50.0" prefWidth="284.0" promptText="%prompt.search">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
                                     </TextField>
-                                    <Button fx:id="btn_SearchSubActivitie" focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnSearchSubActivitie" text="%button.search" />
+                                    <Button fx:id="btn_SearchSubActivitie" focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnSearchSubActivitie" text="%button.search">
+                                       <graphic>
+                                          <ImageView fx:id="imgSearch" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </graphic></Button>
                                  </children>
                               </HBox>
                               <TableView fx:id="tblV_SubActivities" focusTraversable="false">
@@ -176,7 +192,7 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <TextField fx:id="txt_SubActivitieName" focusTraversable="false" prefHeight="80.0" promptText="%prompt.subactivityName">
+                              <TextField fx:id="txt_SubActivitieName" focusTraversable="false" prefHeight="70.0" promptText="%prompt.subactivityName">
                                  <VBox.margin>
                                     <Insets top="10.0" />
                                  </VBox.margin>
@@ -190,6 +206,9 @@
                                        <HBox.margin>
                                           <Insets top="10.0" />
                                        </HBox.margin>
+                                       <graphic>
+                                          <ImageView fx:id="imgNew" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                       </graphic>
                                     </Button>
                                  </children>
                               </HBox>
@@ -218,7 +237,7 @@
             </VBox>
          </children>
          <styleClass>
-            <String fx:value="smoothbackground2" />
+            <String fx:value="smoothbackground" />
             <String fx:value="shadoweffect" />
          </styleClass>
       </AnchorPane>

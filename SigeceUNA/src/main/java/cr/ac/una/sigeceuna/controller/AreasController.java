@@ -36,6 +36,7 @@ import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
@@ -148,6 +149,10 @@ public class AreasController extends Controller implements Initializable {
     List<Node> requiredSpacesSubactivity = new ArrayList<>();
     
     private ResourceBundle bundle;
+    @FXML
+    private ImageView imgSearch;
+    @FXML
+    private ImageView imgNew;
     @Override
     public void initialize() {
         this.bundle=FlowController.getIdioma();

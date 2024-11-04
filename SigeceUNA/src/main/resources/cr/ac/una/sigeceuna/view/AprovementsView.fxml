@@ -6,25 +6,29 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="594.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.AprovementsController">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="720.0" prefWidth="594.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.AprovementsController">
    <children>
-      <AnchorPane AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+      <AnchorPane styleClass="smoothbackground" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
-            <HBox alignment="TOP_CENTER" layoutX="-14.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
+            <HBox alignment="TOP_CENTER" layoutX="-14.0" styleClass="smoothbackground" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="0.0">
                <children>
                   <VBox alignment="TOP_CENTER" spacing="10.0" HBox.hgrow="SOMETIMES">
                      <children>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                            <children>
                               <Label alignment="CENTER" prefHeight="68.0" prefWidth="285.0" styleClass="label-title" text="%label.aprobations" textAlignment="CENTER" />
-                              <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnNewAprovement" text="%button.new" />
+                              <Button focusTraversable="false" mnemonicParsing="false" onAction="#onActionBtnNewAprovement" text="%button.new">
+                                 <graphic>
+                                    <ImageView fx:id="imgNew" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true" />
+                                 </graphic></Button>
                            </children>
                         </HBox>
-                        <TableView fx:id="tblV_Aprovements" focusTraversable="false">
+                        <TableView fx:id="tblV_Aprovements" focusTraversable="false" prefWidth="485.0">
                           <columns>
                             <TableColumn fx:id="tblC_ID" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" text="%tblC.id" />
                             <TableColumn fx:id="tblC_State" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" text="%tblC.state" />
@@ -44,10 +48,6 @@
                </children>
             </HBox>
          </children>
-         <styleClass>
-            <String fx:value="smoothbackground2" />
-            <String fx:value="shadoweffect" />
-         </styleClass>
       </AnchorPane>
    </children>
    <styleClass>
