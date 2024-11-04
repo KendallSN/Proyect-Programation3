@@ -33,6 +33,9 @@
 #imgExit{
     -fx-image: url("../resources/iconStart.png");
 }
+#imgRole{ -fx-image: url("../resources/role.png");}
+#imgCancelTem{-fx-image: url("../resources/cancelTem.png");}
+#imgConfirm{-fx-image: url("../resources/confirm.png");}
 
 /****************************************************************
     LABELS
@@ -44,8 +47,9 @@
     -fx-padding: 5px;
 }
 #labelEnterEmail{
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
 }
+
 #lbl_expired {
     -fx-background-color: #FFCDD2;
     -fx-text-fill: #B71C1C;
@@ -58,6 +62,29 @@
 }
 .boldlabel{
     -fx-font-weight: bold;
+}
+.label-title {
+    -fx-font-size: 24px;             /* Tamaño de fuente del título */
+    -fx-font-weight: bold;           /* Negrita para hacer el título más destacado */
+    -fx-text-fill: #2a2a2a;          /* Color del texto */
+    -fx-padding: 10px 0;             /* Espaciado arriba y abajo */
+    -fx-border-color: transparent;   /* Quita cualquier borde */
+    -fx-background-color: transparent;
+}
+
+.label-subtitle {
+    -fx-font-size: 16px;             /* Tamaño de fuente más pequeño para subtítulos */
+    -fx-font-weight: bold;
+    -fx-text-fill: #4a4a4a;
+    -fx-padding: 8px 0;
+}
+
+/****************************************************************
+    TEXT FILE
+*****************************************************************/
+.textFileSize {
+    -fx-pref-width: 400px;  
+    -fx-pref-height: 50px;  
 }
 
 /****************************************************************
@@ -115,21 +142,6 @@
     -fx-border-width: 0.5px;
 }
 
-.label-title {
-    -fx-font-size: 24px;             /* Tamaño de fuente del título */
-    -fx-font-weight: bold;           /* Negrita para hacer el título más destacado */
-    -fx-text-fill: #2a2a2a;          /* Color del texto */
-    -fx-padding: 10px 0;             /* Espaciado arriba y abajo */
-    -fx-border-color: transparent;   /* Quita cualquier borde */
-    -fx-background-color: transparent;
-}
-
-.label-subtitle {
-    -fx-font-size: 16px;             /* Tamaño de fuente más pequeño para subtítulos */
-    -fx-font-weight: bold;
-    -fx-text-fill: #4a4a4a;
-    -fx-padding: 8px 0;
-}
 /****************************************************************
     BUTTONS
 *****************************************************************/
@@ -162,18 +174,13 @@
 .button-Delete{
     -fx-background-color:#b72c2c;
 }
-#btnCancel{
+#btnCancel,#btnCancelTem{
     -fx-background-color:#b72c2c;
 }
-#btnLogIn{
+#btnLogIn, #btnConfirmTem{
     -fx-background-color:#6c9669;
 }
-#btnCancel:hover {
-    -fx-background-color: -fx-base-color-third;
-    -fx-text-fill: white;
-}
-
-#btnLogIn:hover {
+#btnCancel:hover, #btnConfirmTem:hover, #btnLogIn:hover, #btnCancelTem:hover, #btnConfirm:hover{
     -fx-background-color: -fx-base-color-third;
     -fx-text-fill: white;
 }
@@ -181,6 +188,7 @@
 #btnConfirm{
     -fx-background-color:#6c9669;
 }
+
 #btnForgotPassword {
     -fx-background-color: transparent;
     -fx-border-width: 0;

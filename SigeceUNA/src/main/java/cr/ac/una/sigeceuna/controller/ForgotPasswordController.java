@@ -13,26 +13,29 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author altam
- */
 public class ForgotPasswordController extends Controller implements Initializable {
 
     @FXML
     private Label labelEnterEmail;
     @FXML
     private TextField txtEmail;
-    @FXML
-    private Button btnCancel;
-    @FXML
-    private Button btnConfirm;
 
     private UserService userService=new UserService();
     private static String CharactersAllow = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_*";
+    @FXML
+    private Button btnCancelTem;
+    @FXML
+    private Button btnConfirmTem;
+    @FXML
+    private ImageView imgLogo;
+    @FXML
+    private ImageView imgCancelTem;
+    @FXML
+    private ImageView imgConfirm;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO

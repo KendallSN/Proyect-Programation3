@@ -15,31 +15,37 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
-/**
- * FXML Controller class
- *
- * @author altam
- */
 public class MainController extends Controller implements Initializable {
 
     @FXML
     private ImageView imgLogo;
     @FXML
-    private Button btnChat;
-    @FXML
     private Button btnExit;
     @FXML
-    private BorderPane root;
-    
+    private BorderPane root;   
     @FXML
-    private Label lbl_UserName;
-    
+    private Label lbl_UserName;  
     @FXML
     private Label lbl_role;
-
     private ResourceBundle bundle;
     private UserDto loggedUser;
     private String currentRole;
+    @FXML
+    private ImageView imgLogin;
+    @FXML
+    private ImageView imgRole;
+    @FXML
+    private Button btnHome;
+    @FXML
+    private Button btnAreas;
+    @FXML
+    private Button btnCalendar;
+    @FXML
+    private Button btnManagement;
+    @FXML
+    private Button btnAprovements;
+    @FXML
+    private Button btnSearchManagement;
     /**
      * Initializes the controller class.
      */
@@ -108,7 +114,5 @@ public class MainController extends Controller implements Initializable {
             AppContext.getInstance().delete("ManagementSelected");
             FlowController.getInstance().salir();
         }
-
     }
-
 }
