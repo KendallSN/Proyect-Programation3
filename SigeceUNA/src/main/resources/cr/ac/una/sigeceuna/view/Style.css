@@ -1,19 +1,27 @@
-*{
-    -fx-base-color-first: #d14334;
-    -fx-base-color-second: #B6C8CF;
-    -fx-base-color-third: #178FCC;
-    -fx-base-color-fourth:#24599c;
-    -fx-base-color-fifth:#1c2130;
-    -fx-color-background: #ec9999;
-    -fx-base-color-green:#75c48a;
-    -fx-base-color-darkGreen:#0a6623;
+* {
+    -fx-base-color-first: #bbd5d9;       /* Azul muy claro */
+    -fx-base-color-second: #f3f3f3;      /* Gris muy claro */
+    -fx-base-color-third: #1e202f;       /* Gris muy oscuro */
+    -fx-base-color-fourth: #79787e;      /* Gris medio */
+    -fx-base-color-fifth: #e5e5e5;       /* Gris claro */
+    -fx-color-background: #ce3232;       /* Rosa claro */
+    -fx-base-color-green: #75c48a;       /* Verde claro */
+    -fx-base-color-darkGreen: #0a6623;   /* Verde oscuro */
 }
 
-/*Images*/
+/****************************************************************
+    IMAGE
+*****************************************************************/
 #imgLogo{
     -fx-image: url("../resources/SigeceUNA.png");
 }
 #imgUser{
+    -fx-image: url("../resources/icon1.png");
+}
+#imgCancel{
+    -fx-image: url("../resources/cancel.png");
+}
+#imgLogin{
     -fx-image: url("../resources/iconLogin.png");
 }
 #imgPassword{
@@ -22,8 +30,13 @@
 #imgUserPhoto{
     -fx-image: url("../resources/photo.png");
 }
+#imgExit{
+    -fx-image: url("../resources/iconStart.png");
+}
 
-/*Label*/
+/****************************************************************
+    LABELS
+*****************************************************************/
 .label {
     -fx-font-size: 15px;
     -fx-text-fill: black;
@@ -44,9 +57,12 @@
     -fx-background-radius: 5px;
 }
 .boldlabel{
-     -fx-font-weight: bold;
+    -fx-font-weight: bold;
 }
 
+/****************************************************************
+    DATE PICKER
+*****************************************************************/
 /*Date picker*/
 .date-picker .spinner .text {
     -fx-font-size: 12px; /* Ajustar el tamaño de la fuente del encabezado (mes/año) */
@@ -78,12 +94,14 @@
 .date-picker .day-cell:hover {
     -fx-background-color: lightblue; /* Cambiar el color al pasar el mouse */
 }
-/*background*/
+/****************************************************************
+    BACKGROUND
+*****************************************************************/
 .smoothbackground{
     -fx-background-color:-fx-base-color-second;
 }
 .smoothbackground2{
-    -fx-background-color:#e1e7e8;
+    -fx-background-color:-fx-base-color-first;
 }
 .rootbackground{
     -fx-background-color:-fx-base-color-fourth;
@@ -93,7 +111,7 @@
 }
 .greybackground {
     -fx-background-color: #e4e4e4;
-    -fx-border-color: #606060; 
+    -fx-border-color: #606060;
     -fx-border-width: 0.5px;
 }
 
@@ -112,8 +130,9 @@
     -fx-text-fill: #4a4a4a;
     -fx-padding: 8px 0;
 }
-
-/*Buttons*/
+/****************************************************************
+    BUTTONS
+*****************************************************************/
 .button {
     -fx-pref-width: 200px;
     -fx-pref-height: 40px;
@@ -122,7 +141,7 @@
     -fx-cursor: hand;
     -fx-border-color: -fx-base-color-fourth;
     -fx-background-color: -fx-base-color-second;
-    -fx-text-fill: -fx-base-color-fifth;
+    -fx-text-fill: -fx-base-color-third;
     -fx-font-weight: bold;
     -fx-background-radius: 20px;
     -fx-border-radius: 20px;
@@ -134,12 +153,11 @@
     -fx-background-color: -fx-base-color-third;
     -fx-text-fill: white;
 }
-
 .button:pressed {
     -fx-background-color: -fx-base-color-fourth;
 }
 .button-Save{
-  -fx-background-color:#97dcaa;
+    -fx-background-color:#97dcaa;
 }
 .button-Delete{
     -fx-background-color:#b72c2c;
@@ -150,17 +168,27 @@
 #btnLogIn{
     -fx-background-color:#6c9669;
 }
+#btnCancel:hover {
+    -fx-background-color: -fx-base-color-third;
+    -fx-text-fill: white;
+}
+
+#btnLogIn:hover {
+    -fx-background-color: -fx-base-color-third;
+    -fx-text-fill: white;
+}
+
 #btnConfirm{
     -fx-background-color:#6c9669;
 }
 #btnForgotPassword {
     -fx-background-color: transparent;
     -fx-border-width: 0;
-    -fx-text-fill: blue;
+    -fx-text-fill: -fx-base-color-fourth;
     -fx-font-size: 14px;
     -fx-padding: 0;
     -fx-underline: true;
-    -fx-underline-color: blue;
+    -fx-underline-color: -fx-base-color-fourth;
     -fx-font-weight: normal;
 }
 
@@ -189,7 +217,9 @@
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
 }
-
+/****************************************************************
+    CHOICEBOX
+*****************************************************************/
 .choicebox {
     -fx-pref-height: 30px;
     -fx-background-color: -fx-base-color-second;
@@ -205,6 +235,9 @@
     -fx-text-fill: white;
 }
 
+/****************************************************************
+    TABLES
+*****************************************************************/
 .table-view {
     -fx-background-color: #addecf;
     -fx-table-cell-border-color: transparent;
@@ -304,4 +337,3 @@
 .list-cell:odd {
     -fx-background-color: #b5c7c5;
 }
-

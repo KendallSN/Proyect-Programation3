@@ -12,11 +12,6 @@ import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
- * @author altam
- */
 public class AppStartController extends Controller implements Initializable {
 
     @FXML
@@ -25,9 +20,12 @@ public class AppStartController extends Controller implements Initializable {
     private ImageView imgLogo;
     @FXML
     private Button btnLogin;
-
     @FXML
     private Button btnExit;
+    @FXML
+    private ImageView imgLogin;
+    @FXML
+    private ImageView imgExit;
 
     /**
      * Initializes the controller class.

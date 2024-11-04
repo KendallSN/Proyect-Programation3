@@ -4,7 +4,6 @@ import cr.ac.una.sigeceuna.model.UserDto;
 import cr.ac.una.sigeceuna.service.UserService;
 import cr.ac.una.sigeceuna.util.AppContext;
 import cr.ac.una.sigeceuna.util.FlowController;
-import cr.ac.una.sigeceuna.util.Formato;
 import cr.ac.una.sigeceuna.util.Message;
 import cr.ac.una.sigeceuna.util.Response;
 import java.net.URL;
@@ -23,13 +22,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author altam
- */
 public class LoginController extends Controller implements Initializable {
 
     @FXML
@@ -49,6 +42,10 @@ public class LoginController extends Controller implements Initializable {
     @FXML
     private Button btnLogIn;
     String role;
+    @FXML
+    private ImageView imgCancel;
+    @FXML
+    private ImageView imgLogin;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -92,7 +89,6 @@ public class LoginController extends Controller implements Initializable {
         validateUser();
     }
 
-    @FXML
     private void validateUser() {
         try {
             if (txtUser.getText() == null || txtUser.getText().isBlank()) {
