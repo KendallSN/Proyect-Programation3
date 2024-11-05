@@ -276,6 +276,7 @@ public class CreateAprovementsController extends Controller implements Initializ
                     this.observableUsersDto.clear();
                     this.managementDtoSelected=new ManagementDto();
                     this.userDtoSelected=new UserDto();
+                    new Message().showModal(Alert.AlertType.INFORMATION, bundle.getString("saveAprobation"), getStage(), bundle.getString("saveSuccessAprobation"));
                     updateManagementsList();
                     updateAprobationsList();
                 }

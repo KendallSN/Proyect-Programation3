@@ -1,6 +1,9 @@
 package cr.ac.una.sigeceunacomunicationws.model;
 
+import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 public class UserDto implements Serializable {
@@ -19,6 +22,7 @@ public class UserDto implements Serializable {
     private String usrState;
     private String usrTelephone;
     private Long usrVersion;
+    private Collection<RoleDto> roleCollection;
 
     public UserDto(User user) {
         this();
@@ -35,7 +39,12 @@ public class UserDto implements Serializable {
         this.usrLanguage = user.getUsrLanguage();
         this.usrState = user.getUsrState();
         this.usrTelephone = user.getUsrTelephone();
-        this.usrVersion = user.getUsrVersion();     
+        this.usrVersion = user.getUsrVersion();  
+        
+        this.roleCollection = new ArrayList<>();
+        for(Role role : user.getRoleCollection()){
+            this.roleCollection.add(new RoleDto(role));
+        }
     }
 
     public Long getUsrId() {
@@ -168,6 +177,15 @@ public class UserDto implements Serializable {
 
     public void setUsrVersion(Long usrVersion) {
         this.usrVersion = usrVersion;
+    }
+    
+    @XmlTransient
+    public Collection<RoleDto> getRoleCollection() {
+        return this.roleCollection;
+    }
+
+    public void setRoleCollection(Collection<RoleDto> roleCollection) {
+        this.roleCollection = roleCollection;
     }
 
 

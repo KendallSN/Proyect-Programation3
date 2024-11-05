@@ -1,6 +1,7 @@
 package cr.ac.una.sigeceuna.model;
 
 import cr.ac.una.sigeceuna.service.SystemsService;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Objects;
 import javafx.beans.property.ObjectProperty;
@@ -40,6 +41,7 @@ public class UserDto {
         this.usrLanguage = new SimpleObjectProperty("ES");
         this.usrState=new SimpleBooleanProperty(false);
         this.usrTelephone = new SimpleStringProperty();
+        this.roleCollection=new ArrayList<>();
     }
     public Long getUsrId() {
         if (this.usrId.get() != null && !this.usrId.get().isEmpty()) {

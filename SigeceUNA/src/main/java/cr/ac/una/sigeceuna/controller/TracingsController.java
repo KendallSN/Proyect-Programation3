@@ -181,7 +181,7 @@ public class TracingsController extends Controller implements Initializable{
         //choicebox solutionType inicialization
         ObservableList<String> optionsSolutionType = FXCollections.observableArrayList(
             bundle.getString("denied"), 
-            bundle.getString("resolved")
+            bundle.getString("solved")
         );
         this.chb_SolutionType.setItems(optionsSolutionType);
         chb_SolutionType.setAccessibleText("Tipo de solucion");
@@ -441,6 +441,9 @@ public class TracingsController extends Controller implements Initializable{
                         this.tracingDto.setTcgType("file");
                         createFilesDto();                   
                     }
+                    System.out.println(tracingDto.getMgtId().toString()+tracingDto.getTcgVersion()+tracingDto.getTcgCreationdate()
+                    +tracingDto.getTcgSolutiondetail()+tracingDto.getTcgSolutiontype()+tracingDto.getTcgType()+tracingDto.getUsrId().getUsrId().toString());
+                    if(tracingDto.getFileCollection().isEmpty() || tracingDto.getFileCollection()==null){System.out.println("collección nula");}
                     Response response = this.tracingService.saveTracing(tracingDto);
                     if (!response.getState()) {
                         new Message().showModal(Alert.AlertType.ERROR, bundle.getString("saveTracing"), getStage(), response.getMessage());
@@ -483,12 +486,12 @@ public class TracingsController extends Controller implements Initializable{
     }
 
     private void setSolutionType(String solutionType) {
-        switch(solutionType){
-        case "Denegado":
-        case "Denied":
+        switch(solutionType.toLowerCase()){
+        case "denegado":
+        case "denied":
             this.tracingDto.setTcgSolutiontype("denied");break;
-        case "Resuelta":
-        case "Resolved":
+        case "resuelta":
+        case "solved":
             this.tracingDto.setTcgSolutiontype("solved");break;
         default:break;
         }

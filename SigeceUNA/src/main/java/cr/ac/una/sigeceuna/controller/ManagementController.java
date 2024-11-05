@@ -365,7 +365,7 @@ public class ManagementController extends Controller implements Initializable{
                 state = bundle.getString("onHold");
                 break;
             case "Resolved":
-                state = bundle.getString("resolved");
+                state = bundle.getString("solved");
                 break;
             default:
                 state = bundle.getString("unknown");

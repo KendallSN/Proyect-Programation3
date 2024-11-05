@@ -8,6 +8,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
@@ -21,6 +24,7 @@ import jakarta.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
@@ -116,6 +120,11 @@ public class User implements Serializable {
     @NotNull
     @Column(name = "USR_VERSION")
     private Long usrVersion;
+    @JoinTable(name = "COM_USERROLE", joinColumns = {
+        @JoinColumn(name = "USR_ID", referencedColumnName = "USR_ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "ROL_ID", referencedColumnName = "ROL_ID")})
+    @ManyToMany
+    private Collection<Role> roleCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrIdSender")
     private Collection<Message> messageCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usrIdUser2")
@@ -165,6 +174,10 @@ public class User implements Serializable {
         this.usrVersion=userDto.getUsrVersion();
         this.usrTemppassword=userDto.getUsrTemppassword();
         this.usrTelephone=userDto.getUsrTelephone();
+        this.roleCollection = new ArrayList<>();
+        for(RoleDto role : userDto.getRoleCollection()){
+            this.roleCollection.add(new Role(role));
+        }
     }
     public Long getUsrId() {
         return usrId;
@@ -276,6 +289,15 @@ public class User implements Serializable {
 
     public void setUsrVersion(Long usrVersion) {
         this.usrVersion = usrVersion;
+    }
+    
+    @XmlTransient
+    public Collection<Role> getRoleCollection() {
+        return roleCollection;
+    }
+
+    public void setRoleCollection(Collection<Role> roleCollection) {
+        this.roleCollection = roleCollection;
     }
 
     @Override

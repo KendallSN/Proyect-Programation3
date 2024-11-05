@@ -4,7 +4,6 @@ package cr.ac.una.sigeceuna.controller;
 import cr.ac.una.sigeceuna.model.ManagementDto;
 import cr.ac.una.sigeceuna.model.ManagementaprobationDto;
 import cr.ac.una.sigeceuna.model.UserDto;
-import cr.ac.una.sigeceuna.model.gestionPrueba;
 import cr.ac.una.sigeceuna.service.ManagementAprobationService;
 import cr.ac.una.sigeceuna.service.ManagementService;
 import cr.ac.una.sigeceuna.util.AppContext;

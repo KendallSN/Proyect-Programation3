@@ -403,47 +403,45 @@ public class SearchManagementController extends Controller implements Initializa
             new Message().showModal(Alert.AlertType.ERROR, bundle.getString("noManagements"), getStage(),bundle.getString("noManagementsForExcel"));
             return;
         }
-        // Excel creation
-        Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet(bundle.getString("label.managements"));
+        try (Workbook workbook = new XSSFWorkbook()){
             
-        // Set headers
-        int column = 0;
-        int row = 0;
-        Row headerRow = sheet.createRow(row);
-        for (String header : headers) {          
-            headerRow.createCell(column).setCellValue(header);
-            column++;
-        }
-        for(ManagementDto mgt : managements){
-            row++;
-            column = 0;
-            Row mgtheaderRow = sheet.createRow(row);
-            for(String header : headers){               
-                mgtheaderRow.createCell(column).setCellValue(columnData(column, mgt));                
+            Sheet sheet = workbook.createSheet(bundle.getString("label.managements"));
+
+            // Set headers
+            int column = 0;
+            int row = 0;
+            Row headerRow = sheet.createRow(row);
+            for (String header : headers) {          
+                headerRow.createCell(column).setCellValue(header);
                 column++;
-            }    
-        }
-        
-
-        // Save excel window config
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle(bundle.getString("saveFile"));
-        fileChooser.setInitialFileName(bundle.getString("label.managements") + " " + ".xlsx");
-        fileChooser.getExtensionFilters().add(new ExtensionFilter("Excel Files", "*.xlsx"));
-        File file = fileChooser.showSaveDialog(((Window) this.tblV_Managements.getScene().getWindow()));
-
-        if (file != null) {
-            try (FileOutputStream fileOut = new FileOutputStream(file)) {
-                workbook.write(fileOut);
-            } catch (IOException e) {
-                e.printStackTrace();
             }
-        }
-        try {
-            workbook.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+            for(ManagementDto mgt : managements){
+                row++;
+                column = 0;
+                Row mgtheaderRow = sheet.createRow(row);
+                for(String header : headers){               
+                    mgtheaderRow.createCell(column).setCellValue(columnData(column, mgt));                
+                    column++;
+                }    
+            }
+
+
+            // Save excel window config
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle(bundle.getString("saveFile"));
+            fileChooser.setInitialFileName(bundle.getString("label.managements") + " " + ".xlsx");
+            fileChooser.getExtensionFilters().add(new ExtensionFilter("Excel Files", "*.xlsx"));
+            File file = fileChooser.showSaveDialog(((Window) this.tblV_Managements.getScene().getWindow()));
+
+            if (file != null) {
+                try (FileOutputStream fileOut = new FileOutputStream(file)) {
+                    workbook.write(fileOut);
+                    workbook.close();
+                } new Message().showModal(Alert.AlertType.CONFIRMATION, bundle.getString("excelSaved"), getStage(), bundle.getString("excelSaveSuccess"));
+            }
+        }catch (IOException e) {
+               e.printStackTrace();
+            new Message().showModal(Alert.AlertType.ERROR, bundle.getString("saveErrorExcel"), getStage(), bundle.getString("errorSavingExcel"));
         }
     }
     

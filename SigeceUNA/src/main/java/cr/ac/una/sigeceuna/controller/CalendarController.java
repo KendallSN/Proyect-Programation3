@@ -1,7 +1,6 @@
 
 package cr.ac.una.sigeceuna.controller;
 
-import cr.ac.una.sigeceuna.model.gestionPrueba;
 import cr.ac.una.sigeceuna.controller.Controller;
 import cr.ac.una.sigeceuna.model.ManagementDto;
 import cr.ac.una.sigeceuna.model.UserDto;
