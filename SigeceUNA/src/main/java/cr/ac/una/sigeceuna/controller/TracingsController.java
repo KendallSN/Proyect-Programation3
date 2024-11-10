@@ -418,9 +418,11 @@ public class TracingsController extends Controller implements Initializable{
     
     @FXML
     void onActionBtnClean(ActionEvent event) {
-        clearSpaces();
-        this.tracingSelected = new TracingDto();
-        this.tblV_Tracings.getSelectionModel().clearSelection();
+        if (new Message().showConfirmation(bundle.getString("cleanTracing"), getStage(), bundle.getString("sureToCleanSpaces"))) {
+            clearSpaces();
+            this.tracingSelected = new TracingDto();
+            this.tblV_Tracings.getSelectionModel().clearSelection();
+        }
     }
     
     @FXML

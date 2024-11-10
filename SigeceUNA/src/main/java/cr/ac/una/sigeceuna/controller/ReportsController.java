@@ -293,8 +293,8 @@ public class ReportsController extends Controller implements Initializable {
             if (this.rdbSpecificDate.isSelected()) {
                 reportInformation += "en la fecha";
                 reportInformationDates = this.dprSpecificDate.getValue().toString();
-                attendeds = attendeds.stream().filter(m -> m.getMgtSolvedate().toLocalDate().isEqual(dprSpecificDate.getValue())).toList();
-                requesteds = requesteds.stream().filter(m -> m.getMgtSolvedate().toLocalDate().isEqual(dprSpecificDate.getValue())).toList();
+                attendeds = attendeds.stream().filter(m -> m.getMgtCreationdate().toLocalDate().isEqual(dprSpecificDate.getValue())).toList();
+                requesteds = requesteds.stream().filter(m -> m.getMgtCreationdate().toLocalDate().isEqual(dprSpecificDate.getValue())).toList();
             } else {
                 attendeds = attendeds.stream().filter(requestedInRange(dprFromDate.getValue(), dprUntilDate.getValue())).toList();
                 requesteds = requesteds.stream().filter(requestedInRange(dprFromDate.getValue(), dprUntilDate.getValue())).toList();
@@ -473,7 +473,7 @@ public class ReportsController extends Controller implements Initializable {
         UserDto userDto = this.listViewUserReport3.getSelectionModel().getSelectedItem();
         managementaprobationDtos = managementaprobationDtos.stream().filter(ma->(ma.getUsrToaproveId().getUsrId().equals(userDto.getUsrId()))).toList();
         Long approvedAprobations = managementaprobationDtos.stream().filter(ma->(ma.getMgtaState().equals("Approved"))).count();
-        Long rejectedAprobations = managementaprobationDtos.stream().filter(ma->(ma.getMgtaState().equals("Approved"))).count();
+        Long rejectedAprobations = managementaprobationDtos.stream().filter(ma->(ma.getMgtaState().equals("Rejected"))).count();
         Long pendingAprobations = managementaprobationDtos.stream().filter(ma->(ma.getMgtaState().equals("Pending"))).count();
         Long totalAprobations = managementaprobationDtos.stream().count();
         if(!chkAprobationsApproveds.isSelected()){
