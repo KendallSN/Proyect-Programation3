@@ -45,6 +45,7 @@ import javafx.scene.control.SpinnerValueFactory;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.logging.Level;
@@ -232,10 +233,14 @@ public class CreateManagementController extends Controller implements Initializa
         }
         this.activitiesList=(List<ActivityDto>) this.activityService.getActivities().getResult("Activities");
         this.observableActivitiesDto.addAll(this.activitiesList);
+        FXCollections.sort(observableActivitiesDto, Comparator.comparing(ActivityDto::getAreId)
+                .thenComparing(ActivityDto::getActIndexpertype));
         this.tblV_Activities.setItems(observableActivitiesDto);
         
         this.subactivitiesList=(List<SubactivityDto>) this.subactivityService.getSubactivities().getResult("Subactivities");
         this.observableSubactivitiesDto.addAll(subactivitiesList);
+        FXCollections.sort(observableSubactivitiesDto, Comparator.comparing(SubactivityDto::getSareId)
+        .thenComparing(SubactivityDto::getActId).thenComparing(SubactivityDto::getSactIndexpertype));
         this.tblV_SubActivities.setItems(observableSubactivitiesDto);
         
         //Table selections

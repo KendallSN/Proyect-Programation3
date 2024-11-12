@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -15,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.ManagementController">
+<AnchorPane id="AnchorPane" prefHeight="720.0" prefWidth="1280.0" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.sigeceuna.controller.ManagementController">
    <children>
       <AnchorPane styleClass="smoothbackground" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
          <children>
@@ -58,14 +59,22 @@
                                     </HBox>
                                     <HBox prefHeight="49.0" prefWidth="627.0">
                                        <children>
-                                          <Label styleClass="label-small" text="%label.subject" />
-                                          <TextField fx:id="txt_Subject" disable="true" editable="false" focusTraversable="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="170.0" promptText="%prompt.subject">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </TextField>
-                                          <Label fx:id="lbl_Resolved" focusTraversable="false" text="%label.solved" visible="false" />
-                                          <TextField fx:id="txt_SolvedDate" disable="true" focusTraversable="false" prefHeight="43.0" prefWidth="185.0" promptText="Fecha de resolución" visible="false">
+                                          <Label prefHeight="31.0" prefWidth="95.0" styleClass="label-small" text="%label.subject" />
+                                          <ScrollPane fitToWidth="true" hbarPolicy="ALWAYS" prefHeight="49.0" prefWidth="158.0">
+                                            <content>
+                                              <AnchorPane>
+                                                   <children>
+                                                      <TextField fx:id="txt_Subject" disable="true" editable="false" focusTraversable="false" layoutX="-4.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="43.0" prefWidth="504.0" promptText="%prompt.subject">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </ScrollPane>
+                                          <Label fx:id="lbl_Resolved" focusTraversable="false" prefHeight="31.0" prefWidth="114.0" text="%label.solved" visible="false" />
+                                          <TextField fx:id="txt_SolvedDate" disable="true" focusTraversable="false" prefHeight="43.0" promptText="Fecha de resolución" visible="false">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -81,7 +90,7 @@
                                     <HBox prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <Label prefHeight="31.0" prefWidth="100.0" styleClass="label-small" text="%label.description" />
-                                          <TextArea fx:id="txtA_Description" disable="true" prefHeight="100.0" prefWidth="402.0" promptText="%prompt.description">
+                                          <TextArea fx:id="txtA_Description" editable="false" prefHeight="100.0" prefWidth="402.0" promptText="%prompt.description">
                                              <font>
                                                 <Font size="18.0" />
                                              </font>
@@ -154,11 +163,19 @@
                                     <HBox prefHeight="59.0" prefWidth="445.0">
                                        <children>
                                           <Label prefHeight="31.0" prefWidth="182.0" text="%label.activitieOrSubactivitie" />
-                                          <TextField fx:id="txt_ActivityorSubActivity" disable="true" focusTraversable="false" prefHeight="50.0" prefWidth="220.0" promptText="%prompt.activitieOrSubactivitie">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </TextField>
+                                          <ScrollPane fitToHeight="true" hbarPolicy="ALWAYS" prefHeight="59.0" prefWidth="233.0">
+                                            <content>
+                                              <AnchorPane>
+                                                   <children>
+                                                      <TextField fx:id="txt_ActivityorSubActivity" disable="true" focusTraversable="false" prefHeight="50.0" prefWidth="1000.0" promptText="%prompt.activitieOrSubactivitie">
+                                                         <font>
+                                                            <Font size="18.0" />
+                                                         </font>
+                                                      </TextField>
+                                                   </children>
+                                                </AnchorPane>
+                                            </content>
+                                          </ScrollPane>
                                        </children>
                                     </HBox>
                                     <Label styleClass="label-subtitle" text="%label.usersToApprove" />

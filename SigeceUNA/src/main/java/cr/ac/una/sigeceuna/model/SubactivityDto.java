@@ -1,5 +1,6 @@
 package cr.ac.una.sigeceuna.model;
 
+import cr.ac.una.sigeceuna.service.ActivityService;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -45,6 +46,12 @@ public class SubactivityDto implements Serializable {
         this.sactIndexpertype = sactIndexpertype;
     }
 
+    public Long getSareId(){
+        ActivityService activityService=new ActivityService();
+        ActivityDto activityDto=(ActivityDto) activityService.getActivity(actId).getResult("Activity");
+        return activityDto.getAreId();
+    }
+    
     public String getSactName() {
         return sactName.get();
     }
